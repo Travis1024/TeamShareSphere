@@ -1,0 +1,78 @@
+server:
+  port: 10010
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: auth
+          uri: lb://auth-service
+          predicates:
+            - Path=/auth/**
+          filters:
+            - PreserveHostHeader  # 转发请求的时候，保持客户端的Host信息不变，然后将它传递到下游服务器中
+        - id: file
+          uri: lb://file-service
+          predicates:
+            - Path=/file/**
+        - id: media
+          uri: lb://media-service
+          predicates:
+            - Path=/media/**
+        - id: minio
+          uri: lb://minio-service
+          predicates:
+            - Path=/minio/**
+        - id: remark
+          uri: lb://remark-service
+          predicates:
+            - Path=/remark/**
+        - id: search
+          uri: lb://search-service
+          predicates:
+            - Path=/search/**
+        - id: system
+          uri: lb://system-service
+          predicates:
+            - Path=/system/**
+        - id: team
+          uri: lb://team-service
+          predicates:
+            - Path=/team/**
+      default-filters:
+        - StripPrefix=1
+      globalcors: # 全局跨域配置
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: # 允许哪些网站的跨域请求
+              - "*"
+            allowedMethods: # 允许的跨域 ajax 的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*"     # 允许在请求中携带的头信息
+            allowCredentials: true  # 是否允许携带cookie
+            maxAge: 360000          # 这次跨域检测的有效期
+
+knife4j:
+  gateway:
+    enabled: true
+    strategy: discover
+    discover:
+      enabled: true
+      version: openapi3
+
+logging:
+  file:
+    path: "logs/${spring.application.name}"
+  level:
+    root: debug

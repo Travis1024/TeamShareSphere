@@ -9,16 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @ClassName AuthProperties
- * @Description 鉴权配置信息
+ * @ClassName PathFilterProperties
+ * @Description 路径过滤配置信息
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/20
  */
 @Data
 @Component
-@ConfigurationProperties(prefix = "tss.auth")
-public class AuthProperties {
+@ConfigurationProperties(prefix = "tss.path-filter")
+public class PathFilterProperties {
 
     private Set<String> excludePath;
 

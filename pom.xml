@@ -22,6 +22,7 @@
         <module>tss-search</module>
         <module>tss-remark</module>
         <module>tss-minio</module>
+        <module>tss-system</module>
     </modules>
 
     <!-- 继承 SpringBoot 父工程 -->

@@ -29,11 +29,9 @@ public class AuthProperties {
         }
 
         // 添加默认不拦截的路径（此处路径已经将服务前缀过滤掉）
-        excludePath.add("/error/**");
-        excludePath.add("/account/login");
-        excludePath.add("/account/admin/login");
-        excludePath.add("/account/refresh");
-
+        excludePath.add("/auth/login");
+        excludePath.add("/auth/admin/login");
+        // swagger 路径排除
         excludePath.add("/v2/**");
         excludePath.add("/v3/**");
         excludePath.add("/swagger-resources/**");

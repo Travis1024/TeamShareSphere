@@ -10,18 +10,18 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 
 /**
- * @ClassName GatewayApp
- * @Description GatewayApp
+ * @ClassName GatewayApplication
+ * @Description GatewayApplication
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/20
  */
 @Slf4j
 @SpringBootApplication
-public class GatewayApp {
+public class GatewayApplication {
     public static void main(String[] args) throws UnknownHostException {
         // Run and get environment variables
-        ConfigurableEnvironment environment = SpringApplication.run(GatewayApp.class, args).getEnvironment();
+        ConfigurableEnvironment environment = SpringApplication.run(GatewayApplication.class, args).getEnvironment();
         // Judge protocol
         String protocol = environment.getProperty("server.ssl.key-store") != null ? "https" : "http";
 
@@ -34,20 +34,20 @@ public class GatewayApp {
                 "                                                                /_/                           \n"
         );
         System.out.println("(♥◠‿◠)ﾉﾞ  TSS-Gateway Run Successfully!   ლ(´ڡ`ლ)ﾞ  ");
-        System.out.println(
-                String.format("\n---------------------------------------------------------------------------------------\n\t" +
-                        "Application '{}' is running! Access URLs:\n\t" +
-                        "Local: \t\t{}://localhost:{}\n\t" +
-                        "External: \t{}://{}:{}\n\t" +
-                        "Profile(s): \t{}" +
-                        "\n---------------------------------------------------------------------------------------",
-                        environment.getProperty("spring.application.name"),
-                        protocol,
-                        environment.getProperty("server.port"),
-                        protocol,
-                        InetAddress.getLocalHost().getHostAddress(),
-                        environment.getProperty("server.port"),
-                        Arrays.toString(environment.getActiveProfiles()))
+        System.out.printf(
+                "\n---------------------------------------------------------------------------------------\n\t" +
+                "Application '%s' is running! Access URLs:\n\t" +
+                "Local: \t\t%s://localhost:%s\n\t" +
+                "External: \t%s://%s:%s\n\t" +
+                "Profile(s): \t%s" +
+                "\n---------------------------------------------------------------------------------------\n",
+                environment.getProperty("spring.application.name"),
+                protocol,
+                environment.getProperty("server.port"),
+                protocol,
+                InetAddress.getLocalHost().getHostAddress(),
+                environment.getProperty("server.port"),
+                Arrays.toString(environment.getActiveProfiles())
         );
     }
 }

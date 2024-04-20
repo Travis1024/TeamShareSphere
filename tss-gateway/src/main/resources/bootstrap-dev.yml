@@ -1,0 +1,27 @@
+--- # Nacos 服务注册与发现中心
+spring:
+  cloud:
+    nacos:
+      server-addr: ENC(wrK3GlaYthj0c/PTLAOp9EVcyq3HbDc1Cr4uskYhptU=)
+      discovery:
+        group: DEFAULT_GROUP
+        namespace: 4fd974ce-ac93-46df-bb71-1ac77a9077e8
+        username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
+        password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
+
+--- # Nacos 配置中心
+spring:
+  cloud:
+    nacos:
+      server-addr: ENC(wrK3GlaYthj0c/PTLAOp9EVcyq3HbDc1Cr4uskYhptU=)
+      config:
+        file-extension: yaml
+        group: DEFAULT_GROUP
+        namespace: 4fd974ce-ac93-46df-bb71-1ac77a9077e8
+        username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
+        password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
+#        shared-configs:     # Nacos 共享配置
+#          - data-id: shared-spring.yaml
+#            refresh: true
+#          - data-id: shared-redis.yaml
+#            refresh: true

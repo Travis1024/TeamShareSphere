@@ -75,4 +75,9 @@ logging:
   file:
     path: "logs/${spring.application.name}"
   level:
-    root: debug
+    root: info
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

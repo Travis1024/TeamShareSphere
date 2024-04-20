@@ -5,6 +5,11 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tss-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tss-auth/tss-auth-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tss-auth/tss-auth-gateway-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tss-auth/tss-auth-resource-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tss-auth/tss-auth-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-common/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-file/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-gateway/src/main/java" charset="UTF-8" />
@@ -12,6 +17,7 @@
     <file url="file://$PROJECT_DIR$/tss-minio/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-remark/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-search/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tss-system/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tss-team/src/main/java" charset="UTF-8" />
   </component>
 </project>

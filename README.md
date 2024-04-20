@@ -2,7 +2,7 @@
 
 ![Static Badge](https://img.shields.io/badge/License-MIT-blue)   ![Static Badge](https://img.shields.io/badge/Statue-Developing-blue)   ![Static Badge](https://img.shields.io/badge/Spring_Cloud-v2021.0.8-orange)  ![Static Badge](https://img.shields.io/badge/Sonar_Qube-All_A-g)  
 
-
+![image-20240420212944040](https://travisnotes.oss-cn-shanghai.aliyuncs.com/mdpic/202404202129116.png)
 
 ## 功能介绍
 

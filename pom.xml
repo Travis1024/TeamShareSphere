@@ -39,10 +39,11 @@
         <spring.cloud.version>2021.0.8</spring.cloud.version>
         <spring.cloud.alibaba.version>2021.0.5.0</spring.cloud.alibaba.version>
         <mysql.version>8.0.33</mysql.version>
-        <mybatis.plus.version>3.5.3.1</mybatis.plus.version>
+        <mybatis.plus.version>3.5.6</mybatis.plus.version>
         <knife4j.version>4.3.0</knife4j.version>
         <hutool.version>5.8.25</hutool.version>
         <redisson.version>3.26.0</redisson.version>
+        <commons-pool2.version>2.12.0</commons-pool2.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +76,11 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
             <!-- knife4j 依赖包管理 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
@@ -91,6 +97,29 @@
                 <artifactId>redisson</artifactId>
                 <version>${redisson.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-redis-jackson</artifactId>
+                <version>1.37.0</version>
+            </dependency>
+            <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-boot-starter</artifactId>
+                <version>1.37.0</version>
+            </dependency>
+            <!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
+                <version>1.37.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

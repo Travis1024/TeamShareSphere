@@ -5,23 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.travis</groupId>
-        <artifactId>TeamShareSphere</artifactId>
+        <artifactId>tss-auth</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>tss-auth</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>tss-auth-common</module>
-        <module>tss-auth-gateway-sdk</module>
-        <module>tss-auth-resource-sdk</module>
-        <module>tss-auth-service</module>
-    </modules>
+    <artifactId>tss-auth-common</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.travis</groupId>
+            <artifactId>tss-common</artifactId>
+            <version>${version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

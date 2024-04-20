@@ -5,18 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.travis</groupId>
-        <artifactId>TeamShareSphere</artifactId>
+        <artifactId>tss-auth</artifactId>
         <version>1.0.0</version>
     </parent>
 
-    <artifactId>tss-auth</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>tss-auth-common</module>
-        <module>tss-auth-gateway-sdk</module>
-        <module>tss-auth-resource-sdk</module>
-        <module>tss-auth-service</module>
-    </modules>
+    <artifactId>tss-auth-service</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  org.travis.common.config.mvc.MvcAutoConfig,\
+  org.travis.common.config.mybatis.MybatisAutoConfig,\
+  org.travis.common.config.redisson.RedissonAutoConfig

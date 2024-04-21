@@ -24,3 +24,5 @@ spring:
           # Nacos 共享配置
           - data-id: shared-spring.yaml
             refresh: true
+          - data-id: shared-redis.yaml
+            refresh: true

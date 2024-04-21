@@ -9,7 +9,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-import org.travis.common.Constants.SystemConstant;
+import org.travis.common.constants.SystemConstant;
 import reactor.core.publisher.Mono;
 
 /**

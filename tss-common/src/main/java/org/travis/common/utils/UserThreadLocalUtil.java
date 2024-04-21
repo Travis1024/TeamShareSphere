@@ -4,7 +4,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
  * @ClassName UserThreadLocalUtil
- * @Description 线程上下文工具类（存储用户ID）
+ * @Description 线程上下文工具类（存储userId）
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/21
@@ -14,7 +14,7 @@ public class UserThreadLocalUtil {
 
     /**
      * 线程上下文保存用户ID信息
-     * @param userId 用户 ID
+     * @param userId 用户ID
      */
     public static void setUserId(Long userId) {
         USER_THREAD_LOCAL.set(userId);

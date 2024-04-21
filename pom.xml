@@ -46,6 +46,7 @@
         <commons-pool2.version>2.12.0</commons-pool2.version>
         <skywalking.agent.version>9.1.0</skywalking.agent.version>
         <transmittable.threadlocal.version>2.14.5</transmittable.threadlocal.version>
+        <servlet.api.version>2.5</servlet.api.version>
     </properties>
 
     <dependencyManagement>
@@ -130,6 +131,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>transmittable-thread-local</artifactId>
                 <version>${transmittable.threadlocal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>${servlet.api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

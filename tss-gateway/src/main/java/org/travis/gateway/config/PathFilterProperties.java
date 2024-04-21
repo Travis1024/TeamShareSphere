@@ -2,6 +2,7 @@ package org.travis.gateway.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +19,7 @@ import java.util.Set;
 @Data
 @Component
 @ConfigurationProperties(prefix = "tss.path-filter")
+@RefreshScope
 public class PathFilterProperties {
 
     private volatile Set<String> excludePath;

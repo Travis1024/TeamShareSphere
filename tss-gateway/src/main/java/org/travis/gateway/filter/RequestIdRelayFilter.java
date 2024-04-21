@@ -26,7 +26,7 @@ public class RequestIdRelayFilter implements GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 生成 requestId
         String requestId = IdUtil.simpleUUID();
-        // 将 requestId 保存到日志变量池
+        // 将 requestId 保存到日志变量池（TODO 判断是否需要移除）
         MDC.put(SystemConstant.REQUEST_ID_HEADER, requestId);
 
         // 更新请求头
@@ -39,6 +39,7 @@ public class RequestIdRelayFilter implements GlobalFilter {
                 .header(SystemConstant.REQUEST_FROM_HEADER, SystemConstant.GATEWAY_ORIGIN_NAME)
                 .build();
         ServerWebExchange newExchange = exchange.mutate().request(newRequest).build();
+        // 进行下游模块处理，移除 MDC requestId
         return chain.filter(newExchange);
     }
 }

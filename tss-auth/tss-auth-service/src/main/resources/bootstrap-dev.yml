@@ -26,5 +26,3 @@ spring:
             refresh: true
           - data-id: shared-redis.yaml
             refresh: true
-          - data-id: shared-path-filter.yaml
-            refresh: true

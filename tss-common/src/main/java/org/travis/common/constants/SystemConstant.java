@@ -13,6 +13,10 @@ public class SystemConstant {
      */
     public static final String REQUEST_ID_HEADER = "requestId";
     /**
+     * 请求头中的用户 ID 信息
+     */
+    public static final String USER_ID_HEADER = "userId";
+    /**
      * 请求头字段-请求来源 - 网关模块
      */
     public static final String GATEWAY_ORIGIN_NAME = "gateway";

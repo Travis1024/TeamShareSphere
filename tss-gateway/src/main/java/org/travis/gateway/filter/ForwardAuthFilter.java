@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * @ClassName ForwardAuthFilter
- * @Description 全局权限过滤器
+ * @Description 服务间内部调用鉴权
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/21

@@ -20,8 +20,7 @@ spring:
         namespace: 4fd974ce-ac93-46df-bb71-1ac77a9077e8
         username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
         password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
-#        shared-configs:     # Nacos 共享配置
-#          - data-id: shared-spring.yaml
-#            refresh: true
-#          - data-id: shared-redis.yaml
-#            refresh: true
+        shared-configs:
+          # Nacos 共享配置
+          - data-id: shared-spring.yaml
+            refresh: true

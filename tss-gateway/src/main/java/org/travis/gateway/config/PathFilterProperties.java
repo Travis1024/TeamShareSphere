@@ -20,18 +20,20 @@ import java.util.Set;
 @ConfigurationProperties(prefix = "tss.path-filter")
 public class PathFilterProperties {
 
-    private Set<String> excludePath;
+    private volatile Set<String> excludePath;
 
     @PostConstruct
     public void setExcludePath() {
         if (excludePath == null) {
-            excludePath = new HashSet<>();
+            synchronized (PathFilterProperties.class) {
+                if (excludePath == null) {
+                    excludePath = new HashSet<>();
+                }
+            }
         }
 
-        // 添加默认不拦截的路径（此处路径已经将服务前缀过滤掉）
-        excludePath.add("/auth/login");
-        excludePath.add("/auth/admin/login");
         // swagger 路径排除
+        excludePath.add("/favicon.ico");
         excludePath.add("/v2/**");
         excludePath.add("/v3/**");
         excludePath.add("/swagger-resources/**");

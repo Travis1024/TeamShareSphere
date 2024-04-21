@@ -63,6 +63,7 @@ spring:
             allowCredentials: true  # 是否允许携带cookie
             maxAge: 360000          # 这次跨域检测的有效期
 
+# swagger配置
 knife4j:
   gateway:
     enabled: true
@@ -71,12 +72,14 @@ knife4j:
       enabled: true
       version: openapi3
 
+# 日志配置
 logging:
   file:
     path: "logs/${spring.application.name}"
   level:
     root: info
 
+# 隐私信息加密配置
 jasypt:
   encryptor:
     algorithm: PBEWithMD5AndDES

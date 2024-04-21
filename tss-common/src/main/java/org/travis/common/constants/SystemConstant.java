@@ -20,6 +20,10 @@ public class SystemConstant {
      * 请求头字段 - 请求来源
      */
     public static final String REQUEST_FROM_HEADER = "x-request-from";
+    /**
+     * 标记「异常响应」已处理
+     */
+    public static final String BODY_PROCESSED_MARK_HEADER = "IS_BODY_PROCESSED";
 
 
     /**

@@ -4,10 +4,9 @@ import org.travis.common.constants.SystemConstant;
 import org.travis.common.domain.R;
 import org.travis.common.enums.BizCodeEnum;
 import org.travis.common.exceptions.CommonException;
-import org.travis.common.utils.RequestUtil;
+import org.travis.common.utils.RequestInfoUtil;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
  * @Description 统一异常处理类
  * @Author travis-wei
  * @Version v1.0
- * @Data 2024/1/18
+ * @Data 2024/4/21
  */
 @Slf4j
 @RestControllerAdvice
@@ -33,13 +32,13 @@ public class CommonExceptionAdvice {
 
     @ExceptionHandler(CommonException.class)
     public Object handleDatabaseException(CommonException exception) {
-        log.error("[统一异常处理 | 自定义异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), exception.getCode(), exception);
+        log.error("[自定义异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), exception.getCode(), exception);
         return processResponse(exception.getCode(), exception.getMessage());
     }
 
     @ExceptionHandler(FeignException.class)
     public Object handleDatabaseException(FeignException exception) {
-        log.error("[统一异常处理 | Feign远程调用异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), exception.status(), exception);
+        log.error("[Feign远程调用异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), exception.status(), exception);
         return processResponse(exception.status(), exception.getMessage());
     }
 
@@ -49,19 +48,19 @@ public class CommonExceptionAdvice {
         String message = exception.getBindingResult().getAllErrors()
                 .stream().map(ObjectError::getDefaultMessage)
                 .collect(Collectors.joining("|"));
-        log.error("[统一异常处理 | 请求参数校验异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
+        log.error("[请求参数校验异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
         return processResponse(BizCodeEnum.BAD_REQUEST.getCode(), message);
     }
 
     @ExceptionHandler(BindException.class)
     public Object handleBindException(BindException exception) {
-        log.error("[统一异常处理 | 请求参数绑定异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
+        log.error("[请求参数绑定异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
         return processResponse(BizCodeEnum.BAD_REQUEST.getCode(), exception.getMessage());
     }
 
     @ExceptionHandler(NestedServletException.class)
     public Object handleNestedServletException(NestedServletException exception) {
-        log.error("[统一异常处理 | 嵌套服务异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
+        log.error("[嵌套服务异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
         return processResponse(BizCodeEnum.BAD_REQUEST.getCode(), exception.getMessage());
     }
 
@@ -71,16 +70,16 @@ public class CommonExceptionAdvice {
         String message = exception.getConstraintViolations()
                 .stream().map(ConstraintViolation::getMessage)
                 .distinct().collect(Collectors.joining("|"));
-        log.error("[统一异常处理 | 约束违反异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
+        log.error("[约束违反异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), 400, exception);
         return processResponse(BizCodeEnum.BAD_REQUEST.getCode(), message);
     }
 
     @ExceptionHandler(Exception.class)
     public Object handleRuntimeException(Exception exception) {
-        log.error("[统一异常处理 | 未定义异常] -> 异常类:{}, 状态码:{}, URI:{}, 异常信息:",
+        log.error("[未知异常] -> 异常类:{}, 状态码:{}, URI:{}, 异常信息:",
                 exception.getClass().getName(),
                 BizCodeEnum.UNKNOW.getCode(),
-                RequestUtil.getRequest() != null ? RequestUtil.getRequest().getRequestURI() : "NULL",
+                RequestInfoUtil.getRequest() != null ? RequestInfoUtil.getRequest().getRequestURI() : "NULL",
                 exception
         );
         return processResponse(BizCodeEnum.INTERNAL_SERVER_ERROR.getCode(), BizCodeEnum.INTERNAL_SERVER_ERROR.getMessage());
@@ -89,8 +88,8 @@ public class CommonExceptionAdvice {
 
     private Object processResponse(int code, String msg){
         // 1.标记异常响应已处理（避免重复处理）
-        RequestUtil.setResponseHeader(SystemConstant.BODY_PROCESSED_MARK_HEADER, "true");
-        // 2.如果是网关请求，包装错误响应请求，前端基于业务状态码code来判断状态。如果是微服务请求，http状态码基于异常原样返回，微服务自己做fallback处理。
-        return RequestUtil.isGatewayRequest() ? R.error(code, msg).requestId(MDC.get(SystemConstant.REQUEST_ID_HEADER)) : ResponseEntity.status(code).body(msg);
+        RequestInfoUtil.setResponseHeader(SystemConstant.BODY_PROCESSED_MARK_HEADER, "true");
+        // 2.如果是网关请求，包装错误响应请求，前端基于业务状态码code来判断状态。如果是微服务请求，http状态码基于异常原样返回，微服务自己做 fallback 处理。
+        return RequestInfoUtil.isGatewayRequest() ? R.error(code, msg) : ResponseEntity.status(code).body(msg);
     }
 }

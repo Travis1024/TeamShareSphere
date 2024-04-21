@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @Description Mybatis 字段自动填充插件（记录 修改人 + 创建人）
  * @Author travis-wei
  * @Version v1.0
- * @Data 2024/1/20
+ * @Data 2024/4/21
  */
 public class MybatisAutoCompleteInterceptor implements InnerInterceptor {
     @Override

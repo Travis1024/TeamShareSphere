@@ -2,9 +2,9 @@ package org.travis.common.config.mvc.advice;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.travis.common.constants.SystemConstant;
-import com.travis.common.domain.R;
-import com.travis.common.utils.RequestUtil;
+import org.travis.common.constants.SystemConstant;
+import org.travis.common.domain.R;
+import org.travis.common.utils.RequestInfoUtil;
 import org.slf4j.MDC;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * @Description 响应信息包装类（R）
  * @Author travis-wei
  * @Version v1.0
- * @Data 2024/1/18
+ * @Data 2024/4/21
  */
 @RestControllerAdvice
 public class WrapperResponseBodyAdvice implements ResponseBodyAdvice<Object> {
@@ -33,7 +33,7 @@ public class WrapperResponseBodyAdvice implements ResponseBodyAdvice<Object> {
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
         // 如果当前响应信息已经被 R 类包装 && 当前请求来自网关路由 返回 true，执行 beforeBodyWrite
-        return returnType.getParameterType() != R.class && RequestUtil.isGatewayRequest();
+        return returnType.getParameterType() != R.class && RequestInfoUtil.isGatewayRequest();
     }
 
     @Override

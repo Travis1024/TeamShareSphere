@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.travis.common.domain.R;
 import org.travis.common.enums.BizCodeEnum;
-import org.travis.gateway.filter.UserInfoRelayFilter;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;

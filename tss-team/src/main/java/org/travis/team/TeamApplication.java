@@ -1,10 +1,9 @@
-package org.travis.gateway;
+package org.travis.team;
 
-import com.alibaba.nacos.api.annotation.NacosProperties;
-import com.alibaba.nacos.spring.context.annotation.EnableNacos;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.net.InetAddress;
@@ -12,18 +11,19 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 
 /**
- * @ClassName GatewayApplication
- * @Description GatewayApplication
+ * @ClassName TeamApplication
+ * @Description TeamApplication
  * @Author travis-wei
  * @Version v1.0
- * @Data 2024/4/20
+ * @Data 2024/4/22
  */
 @Slf4j
 @SpringBootApplication
-public class GatewayApplication {
+@EnableFeignClients(basePackages = "org.travis.api.client")
+public class TeamApplication {
     public static void main(String[] args) throws UnknownHostException {
         // Run and get environment variables
-        ConfigurableEnvironment environment = SpringApplication.run(GatewayApplication.class, args).getEnvironment();
+        ConfigurableEnvironment environment = SpringApplication.run(TeamApplication.class, args).getEnvironment();
         // Judge protocol
         String protocol = environment.getProperty("server.ssl.key-store") != null ? "https" : "http";
 
@@ -35,14 +35,14 @@ public class GatewayApplication {
                 "/_/  \\___/\\__,_/_/ /_/ /_/   /____/_/ /_/\\__,_/_/   \\___/   /____/ .___/_/ /_/\\___/_/   \\___/ \n" +
                 "                                                                /_/                           \n"
         );
-        System.out.println("(♥◠‿◠)ﾉﾞ  TSS-Gateway Run Successfully!   ლ(´ڡ`ლ)ﾞ  ");
+        System.out.println("(♥◠‿◠)ﾉﾞ  TSS-Team Run Successfully!   ლ(´ڡ`ლ)ﾞ  ");
         System.out.printf(
                 "\n---------------------------------------------------------------------------------------\n\t" +
-                "Application '%s' is running! Access URLs:\n\t" +
-                "Local: \t\t%s://localhost:%s\n\t" +
-                "External: \t%s://%s:%s\n\t" +
-                "Profile(s): \t%s" +
-                "\n---------------------------------------------------------------------------------------\n",
+                        "Application '%s' is running! Access URLs:\n\t" +
+                        "Local: \t\t%s://localhost:%s\n\t" +
+                        "External: \t%s://%s:%s\n\t" +
+                        "Profile(s): \t%s" +
+                        "\n---------------------------------------------------------------------------------------\n",
                 environment.getProperty("spring.application.name"),
                 protocol,
                 environment.getProperty("server.port"),

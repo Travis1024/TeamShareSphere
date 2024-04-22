@@ -6,7 +6,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,27 +21,7 @@ import java.util.Set;
 @Data
 @Component
 @ConfigurationProperties(prefix = "tss.path-filter")
-@RefreshScope
 public class PathFilterProperties {
 
-    private volatile Set<String> excludePath;
-
-    @PostConstruct
-    public void setExcludePath() {
-        if (excludePath == null) {
-            synchronized (PathFilterProperties.class) {
-                if (excludePath == null) {
-                    excludePath = new HashSet<>();
-                }
-            }
-        }
-
-        // swagger 路径排除
-        excludePath.add("/favicon.ico");
-        excludePath.add("/v2/**");
-        excludePath.add("/v3/**");
-        excludePath.add("/swagger-resources/**");
-        excludePath.add("/webjars/**");
-        excludePath.add("/doc.html");
-    }
+    public List<String> excludePath;
 }

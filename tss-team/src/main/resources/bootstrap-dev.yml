@@ -26,24 +26,3 @@ spring:
             refresh: true
           - data-id: shared-redis.yaml
             refresh: true
-
---- # Sentinel 配置信息
-spring:
-  cloud:
-    sentinel:
-      transport:
-        dashboard: 127.0.0.1:8080
-        port: 8719
-      web-context-unify: false
-      # Sentinel 规则持久化到 Nacos
-      datasource:
-        rule1:
-          nacos:
-            namespace: 4fd974ce-ac93-46df-bb71-1ac77a9077e8
-            username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
-            password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
-            serverAddr: ENC(wrK3GlaYthj0c/PTLAOp9EVcyq3HbDc1Cr4uskYhptU=)
-            groupId: DEFAULT_GROUP
-            data-type: json
-            ruleType: flow
-            dataId: SentinelFlowRule.json

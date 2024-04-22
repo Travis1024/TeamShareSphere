@@ -1,0 +1,43 @@
+server:
+  port: 10012
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: team-service
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match:
+        - '/**'
+      packages-to-scan:
+        - org.travis.team.controller
+
+# swagger配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# 日志配置
+logging:
+  file:
+    path: "logs/${spring.application.name}"
+  level:
+    root: info
+
+# 隐私信息加密配置
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

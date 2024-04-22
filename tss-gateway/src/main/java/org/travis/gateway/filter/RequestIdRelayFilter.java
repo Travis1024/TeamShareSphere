@@ -2,13 +2,13 @@ package org.travis.gateway.filter;
 
 import cn.hutool.core.util.IdUtil;
 import org.slf4j.MDC;
-import org.springframework.cloud.gateway.filter.GatewayFilterChain;
-import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebFilter;
+import org.springframework.web.server.WebFilterChain;
 import org.travis.common.constants.SystemConstant;
 import reactor.core.publisher.Mono;
 
@@ -21,9 +21,9 @@ import reactor.core.publisher.Mono;
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @Component
-public class RequestIdRelayFilter implements GlobalFilter {
+public class RequestIdRelayFilter implements WebFilter {
     @Override
-    public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+    public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         // 生成 requestId
         String requestId = IdUtil.simpleUUID();
         // 将 requestId 保存到日志变量池（TODO 判断是否需要移除）

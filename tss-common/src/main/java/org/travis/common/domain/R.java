@@ -40,7 +40,7 @@ public class R<T> {
      * @Description 请求成功-1
      * @Author travis-wei
      * @Data 2024/4/21
-     * @Return com.travis.common.domain.R<java.lang.Void>
+     * @Return org.travis.common.domain.R<java.lang.Void>
      **/
     public static R<Void> ok() {
         return new R<Void>(BizCodeEnum.SUCCESS.getCode(), BizCodeEnum.SUCCESS.getMessage(), null);
@@ -52,7 +52,7 @@ public class R<T> {
      * @Author travis-wei
      * @Data 2024/4/21
      * @param data	返回数据信息
-     * @Return com.travis.common.domain.R<T>
+     * @Return org.travis.common.domain.R<T>
      **/
     public static <T> R<T> ok(T data) {
         return new R<>(BizCodeEnum.SUCCESS.getCode(), BizCodeEnum.SUCCESS.getMessage(), data);
@@ -64,7 +64,7 @@ public class R<T> {
      * @Author travis-wei
      * @Data 2024/4/21
      * @param msg	失败消息
-     * @Return com.travis.common.domain.R<T>
+     * @Return org.travis.common.domain.R<T>
      **/
     public static <T> R<T> error(String msg) {
         return new R<>(BizCodeEnum.UNKNOW.getCode(), msg, null);
@@ -77,7 +77,7 @@ public class R<T> {
      * @Data 2024/4/21
      * @param code	失败请求码
      * @param msg	失败消息
-     * @Return com.travis.common.domain.R<T>
+     * @Return org.travis.common.domain.R<T>
      **/
     public static <T> R<T> error(int code, String msg) {
         return new R<>(code, msg, null);
@@ -101,7 +101,7 @@ public class R<T> {
      * @Author travis-wei
      * @Data 2024/4/21
      * @param requestId	请求ID
-     * @Return com.travis.common.domain.R<T>
+     * @Return org.travis.common.domain.R<T>
      **/
     public R<T> requestId(String requestId) {
         this.requestId = requestId;

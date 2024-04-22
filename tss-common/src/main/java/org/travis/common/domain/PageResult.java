@@ -41,7 +41,7 @@ public class PageResult<T> {
      * @Data 2024/4/21
      * @param total 总条数
      * @param pages	总页数
-     * @Return com.travis.common.domain.PageObject<T>
+     * @Return org.travis.common.domain.PageObject<T>
      **/
     public static <T> PageResult<T> empty(Long total, Long pages) {
         return new PageResult<>(total, pages, CollUtil.empty(List.class));
@@ -53,7 +53,7 @@ public class PageResult<T> {
      * @Author travis-wei
      * @Data 2024/4/21
      * @param page	mybatis分页查询结果
-     * @Return com.travis.common.domain.PageObject<T>
+     * @Return org.travis.common.domain.PageObject<T>
      **/
     public static <T> PageResult<T> empty(Page<?> page) {
         return new PageResult<>(page.getTotal(), page.getPages(), CollUtil.empty(List.class));
@@ -66,7 +66,7 @@ public class PageResult<T> {
      * @Author travis-wei
      * @Data 2024/4/21
      * @param page mybatis分页查询结果
-     * @Return com.travis.common.domain.PageObject<T>
+     * @Return org.travis.common.domain.PageObject<T>
      **/
     public static <T> PageResult<T> of(Page<T> page) {
         if(page == null){
@@ -85,7 +85,7 @@ public class PageResult<T> {
      * @Data 2024/4/21
      * @param page  mybatis分页查询结果
      * @param mapper   分页结果列表处理函数
-     * @Return com.travis.common.domain.PageObject<T>
+     * @Return org.travis.common.domain.PageObject<T>
      **/
     public static <T,R> PageResult<T> of(Page<R> page, Function<R, T> mapper) {
         if(page == null){
@@ -105,7 +105,7 @@ public class PageResult<T> {
      * @Data 2024/4/21
      * @param page	mybatis分页查询结果
      * @param list	手动传入当前页 List 列表
-     * @Return com.travis.common.domain.PageObject<T>
+     * @Return org.travis.common.domain.PageObject<T>
      **/
     public static <T> PageResult<T> of(Page<?> page, List<T> list) {
         return new PageResult<>(page.getTotal(), page.getPages(), list);
@@ -118,7 +118,7 @@ public class PageResult<T> {
      * @Data 2024/4/21
      * @param page  mybatis分页查询结果
      * @param clazz T 类 -> List(T)
-     * @Return com.travis.common.domain.PageObject<T>
+     * @Return org.travis.common.domain.PageObject<T>
      **/
     public static <T, R> PageResult<T> of(Page<R> page, Class<T> clazz) {
         return new PageResult<>(page.getTotal(), page.getPages(), BeanUtil.copyToList(page.getRecords(), clazz));

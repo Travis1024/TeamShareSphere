@@ -16,7 +16,8 @@ spring:
           predicates:
             - Path=/auth/**
           filters:
-            - PreserveHostHeader  # 转发请求的时候，保持客户端的Host信息不变，然后将它传递到下游服务器中
+            # 转发请求的时候，保持客户端的Host信息不变，然后将它传递到下游服务器中
+            - PreserveHostHeader
         - id: file
           uri: lb://file-service
           predicates:

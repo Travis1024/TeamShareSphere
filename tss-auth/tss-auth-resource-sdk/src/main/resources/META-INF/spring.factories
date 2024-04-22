@@ -1,2 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  org.travis.auth.resource.config.FeignInterceptorAutoConfig
+  org.travis.auth.resource.config.FeignInterceptorAutoConfig, \
+  org.travis.auth.resource.config.InterceptorConfig, \
+  org.travis.auth.resource.config.SaTokenConfig

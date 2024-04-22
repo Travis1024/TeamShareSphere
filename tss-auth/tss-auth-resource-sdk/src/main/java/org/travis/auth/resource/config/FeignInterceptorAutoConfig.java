@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.travis.auth.resource.interceptor.FeignRequestIdInterceptor;
+import org.travis.auth.resource.interceptor.FeignSameTokenInterceptor;
 import org.travis.auth.resource.interceptor.FeignUserInterceptor;
 
 /**
@@ -27,4 +28,8 @@ public class FeignInterceptorAutoConfig {
         return new FeignRequestIdInterceptor();
     }
 
+    @Bean
+    public FeignSameTokenInterceptor addFeignSameTokenInterceptor() {
+        return new FeignSameTokenInterceptor();
+    }
 }

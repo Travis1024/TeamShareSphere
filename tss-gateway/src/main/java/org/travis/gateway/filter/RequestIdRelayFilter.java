@@ -26,7 +26,7 @@ public class RequestIdRelayFilter implements WebFilter {
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         // 生成 requestId
         String requestId = IdUtil.simpleUUID();
-        // 将 requestId 保存到日志变量池（TODO 判断是否需要移除）
+        // 将 requestId 保存到日志变量池
         MDC.put(SystemConstant.REQUEST_ID_HEADER, requestId);
 
         // 更新请求头

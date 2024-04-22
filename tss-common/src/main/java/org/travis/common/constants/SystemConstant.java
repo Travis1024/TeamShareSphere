@@ -25,6 +25,10 @@ public class SystemConstant {
      */
     public static final String REQUEST_FROM_HEADER = "x-request-from";
     /**
+     * 请求头字段 - 是否需要鉴权
+     */
+    public static final String IS_NEED_AUTH = "is-need-auth";
+    /**
      * 标记「异常响应」已处理
      */
     public static final String BODY_PROCESSED_MARK_HEADER = "IS_BODY_PROCESSED";

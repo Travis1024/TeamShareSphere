@@ -1,6 +1,8 @@
 package org.travis.gateway.filter;
 
+import cn.dev33.satoken.exception.InvalidContextException;
 import cn.dev33.satoken.stp.StpUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.annotation.Order;
@@ -17,6 +19,7 @@ import reactor.core.publisher.Mono;
  * @Version v1.0
  * @Data 2024/4/21
  */
+@Slf4j
 @Order(1)
 @Component
 public class UserInfoRelayFilter implements GlobalFilter {
@@ -25,7 +28,8 @@ public class UserInfoRelayFilter implements GlobalFilter {
         /**
          * 处于未登录状态
          */
-        if (!StpUtil.isLogin()) {
+        String isNeedAuth = exchange.getRequest().getHeaders().get(SystemConstant.IS_NEED_AUTH).get(0);
+        if ("NO".equals(isNeedAuth) || !StpUtil.isLogin()) {
             return chain.filter(exchange);
         }
 

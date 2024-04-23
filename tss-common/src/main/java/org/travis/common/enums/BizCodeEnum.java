@@ -33,6 +33,11 @@ public enum BizCodeEnum {
      * 服务端错误
      */
     INTERNAL_SERVER_ERROR(500, "服务器内部错误"),
+
+    /**
+     * 服务降级处理
+     */
+    DEGRADED_SERVICE(800, "服务降级"),
     /**
      * 自定义服务错误
      */

@@ -17,8 +17,8 @@ import org.travis.api.dto.team.UserCheckInfoDTO;
 @RestController
 public class UserCheckController {
 
-    @PostMapping("/user/check")
-    public long checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO) {
-        return "admin".equals(userCheckInfoDTO.getUsername()) && "123456".equals(userCheckInfoDTO.getPassword()) ? 12879709126912940L : -1L;
+    @PostMapping(value = "/user/check")
+    public String checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO) {
+        return "admin".equals(userCheckInfoDTO.getUsername()) && "123456".equals(userCheckInfoDTO.getPassword()) ? String.valueOf(12879709126912940L) : String.valueOf(-1L);
     }
 }

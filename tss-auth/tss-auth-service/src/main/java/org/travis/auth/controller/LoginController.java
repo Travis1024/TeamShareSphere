@@ -3,6 +3,7 @@ package org.travis.auth.controller;
 import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.travis.api.client.team.TeamClient;
 import org.travis.api.dto.team.UserCheckInfoDTO;
+import org.travis.common.domain.R;
 
 import javax.annotation.Resource;
 
@@ -32,10 +34,10 @@ public class LoginController {
         UserCheckInfoDTO userCheckInfoDTO = new UserCheckInfoDTO();
         userCheckInfoDTO.setUsername(username);
         userCheckInfoDTO.setPassword(password);
-        long checkedFlag = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
+        String checked = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
         // 如果查询成功，则进行登录
-        if (checkedFlag != -1) {
-            StpUtil.login(checkedFlag);
+        if (StrUtil.isNotEmpty(checked) && !"-1".equals(checked)) {
+            StpUtil.login(checked);
         }
     }
 

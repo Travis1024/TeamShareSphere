@@ -83,6 +83,18 @@ public class R<T> {
         return new R<>(code, msg, null);
     }
 
+    /**
+     * @MethodName error
+     * @Description 请求错误-3
+     * @Author travis-wei
+     * @Data 2024/4/21
+     * @param code	失败请求码
+     * @param msg	失败消息
+     * @Return org.travis.common.domain.R<T>
+     **/
+    public static <T> R<T> error(int code, String msg, T object) {
+        return new R<>(code, msg, object);
+    }
 
     /**
      * @MethodName isSuccess

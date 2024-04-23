@@ -1,10 +1,14 @@
 package org.travis.api.client.team;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.travis.api.client.team.fallback.TeamClientFallback;
 import org.travis.api.dto.team.UserCheckInfoDTO;
+import org.travis.common.domain.R;
+
+import java.net.http.HttpRequest;
 
 /**
  * @ClassName TeamClient
@@ -15,6 +19,6 @@ import org.travis.api.dto.team.UserCheckInfoDTO;
  */
 @FeignClient(value = "team-service", fallbackFactory = TeamClientFallback.class)
 public interface TeamClient {
-    @PostMapping("/user/check")
-    public long checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO);
+    @PostMapping(value = "/user/check")
+    String checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO);
 }

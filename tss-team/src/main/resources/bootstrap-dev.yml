@@ -26,3 +26,5 @@ spring:
             refresh: true
           - data-id: shared-redis.yaml
             refresh: true
+          - data-id: shared-sa-token.yaml
+            refresh: true

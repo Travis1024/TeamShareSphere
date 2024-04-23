@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.openfeign.FallbackFactory;
 import org.travis.api.client.team.TeamClient;
 import org.travis.api.dto.team.UserCheckInfoDTO;
+import org.travis.common.domain.R;
+import org.travis.common.enums.BizCodeEnum;
 
 /**
  * @ClassName TeamClientFallback
@@ -19,8 +21,8 @@ public class TeamClientFallback implements FallbackFactory<TeamClient> {
         log.error("[Feign-TeamClient] Call exception! Details: ", cause);
         return new TeamClient() {
             @Override
-            public long checkUserInfoAndPassword(UserCheckInfoDTO userCheckInfoDTO) {
-                return -1L;
+            public String checkUserInfoAndPassword(UserCheckInfoDTO userCheckInfoDTO) {
+                return "-1";
             }
         };
     }

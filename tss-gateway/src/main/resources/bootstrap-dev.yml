@@ -28,3 +28,5 @@ spring:
             refresh: true
           - data-id: shared-path-filter.yaml
             refresh: true
+          - data-id: shared-sa-token.yaml
+            refresh: true

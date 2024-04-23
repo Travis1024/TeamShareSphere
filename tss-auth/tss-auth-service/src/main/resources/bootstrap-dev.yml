@@ -26,6 +26,8 @@ spring:
             refresh: true
           - data-id: shared-redis.yaml
             refresh: true
+          - data-id: shared-sa-token.yaml
+            refresh: true
 
 --- # Sentinel 配置信息
 spring:

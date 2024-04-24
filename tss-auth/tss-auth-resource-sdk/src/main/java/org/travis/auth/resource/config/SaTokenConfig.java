@@ -27,7 +27,6 @@ public class SaTokenConfig implements WebMvcConfigurer {
                 .setAuth(obj -> {
                     // 校验 Same-Token 身份凭证，服务间内部调用鉴权
                     String token = SaHolder.getRequest().getHeader(SaSameUtil.SAME_TOKEN);
-                    log.warn("[current toke] {}", token);
                     SaSameUtil.checkToken(token);
                 })
                 // 异常处理方法

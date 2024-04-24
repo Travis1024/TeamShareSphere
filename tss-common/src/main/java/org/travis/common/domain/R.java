@@ -97,13 +97,13 @@ public class R<T> {
     }
 
     /**
-     * @MethodName isSuccess
+     * @MethodName checkSuccess
      * @Description 判断请求是否成功
      * @Author travis-wei
      * @Data 2024/4/21
      * @Return boolean
      **/
-    public boolean isSuccess(){
+    public boolean checkSuccess(){
         return code == BizCodeEnum.SUCCESS.getCode();
     }
 

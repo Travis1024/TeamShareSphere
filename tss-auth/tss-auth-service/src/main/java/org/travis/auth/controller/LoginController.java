@@ -30,11 +30,17 @@ public class LoginController {
 
     @GetMapping("/login")
     public void login(@RequestParam("username") String username, @RequestParam("password") String password) {
+
+        if (StpUtil.isLogin()) {
+            return;
+        }
+
         log.info("登录中：{}", DateUtil.date());
         UserCheckInfoDTO userCheckInfoDTO = new UserCheckInfoDTO();
         userCheckInfoDTO.setUsername(username);
         userCheckInfoDTO.setPassword(password);
         String checked = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
+
         // 如果查询成功，则进行登录
         if (StrUtil.isNotEmpty(checked) && !"-1".equals(checked)) {
             StpUtil.login(checked);

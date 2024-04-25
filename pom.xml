@@ -48,6 +48,7 @@
         <transmittable.threadlocal.version>2.14.5</transmittable.threadlocal.version>
         <servlet.api.version>2.5</servlet.api.version>
         <jasypt.version>3.0.4</jasypt.version>
+        <netflix.hystrix.version>2.2.10.RELEASE</netflix.hystrix.version>
     </properties>
 
     <dependencyManagement>
@@ -137,6 +138,12 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet.api.version}</version>
+            </dependency>
+            <!-- OpenFeign 熔断器 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>2.2.10.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

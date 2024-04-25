@@ -108,6 +108,17 @@ public class R<T> {
     }
 
     /**
+     * @MethodName checkSuccess
+     * @Description 判断服务是否降级
+     * @Author travis-wei
+     * @Data 2024/4/21
+     * @Return boolean
+     **/
+    public boolean checkServiceDegraded(){
+        return code == BizCodeEnum.DEGRADED_SERVICE.getCode();
+    }
+
+    /**
      * @MethodName requestId
      * @Description 手动设置 requestId
      * @Author travis-wei

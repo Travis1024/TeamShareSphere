@@ -1,6 +1,7 @@
 package org.travis.common.exceptions;
 
 import lombok.Getter;
+import org.travis.common.enums.BizCodeEnum;
 
 /**
  * @ClassName BadRequestException
@@ -12,13 +13,18 @@ import lombok.Getter;
 @Getter
 public class BadRequestException extends CommonException {
 
-    private static final int CODE = 400;
+    private static final int CODE = BizCodeEnum.BAD_REQUEST.getCode();
+    private static final String MESSAGE = BizCodeEnum.BAD_REQUEST.getMessage();
 
-    public BadRequestException(String message) {
-        super(CODE, message);
+    public BadRequestException() {
+        this(MESSAGE);
     }
 
-    public BadRequestException(String message, Throwable cause) {
-        super(CODE, message, cause);
+    public BadRequestException(String message) {
+        this(CODE, message);
+    }
+
+    public BadRequestException(int code, String message) {
+        super(code, message);
     }
 }

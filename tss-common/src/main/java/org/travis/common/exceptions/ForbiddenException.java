@@ -1,5 +1,7 @@
 package org.travis.common.exceptions;
 
+import org.travis.common.enums.BizCodeEnum;
+
 /**
  * @ClassName ForbiddenException
  * @Description 权限异常类
@@ -8,11 +10,20 @@ package org.travis.common.exceptions;
  * @Data 2024/4/21
  */
 public class ForbiddenException extends CommonException{
-    public ForbiddenException(int code, String message) {
-        super(code, message);
+
+    private static final int CODE = BizCodeEnum.TOKEN_CHECK_FAILED.getCode();
+    private static final String MESSAGE = BizCodeEnum.TOKEN_CHECK_FAILED.getMessage();
+
+
+    public ForbiddenException() {
+        this(MESSAGE);
     }
 
-    public ForbiddenException(int code, String message, Throwable cause) {
-        super(code, message, cause);
+    public ForbiddenException(String message) {
+        this(CODE, message);
+    }
+
+    public ForbiddenException(int code, String message) {
+        super(code, message);
     }
 }

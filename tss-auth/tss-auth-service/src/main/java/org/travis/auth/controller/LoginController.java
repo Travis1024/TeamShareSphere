@@ -4,6 +4,7 @@ import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.json.JSONUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.travis.api.client.team.TeamClient;
 import org.travis.api.dto.team.UserCheckInfoDTO;
 import org.travis.common.domain.R;
+import org.travis.common.enums.BizCodeEnum;
+import org.travis.common.exceptions.ServiceDegradedException;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -39,22 +42,25 @@ public class LoginController {
     private RedissonClient redissonClient;
 
     @GetMapping("/login")
-    public void login(@RequestParam("username") String username, @RequestParam("password") String password) {
-
+    public R<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         if (StpUtil.isLogin()) {
-            return;
+            return R.ok("用户已登录!");
         }
 
         log.info("登录中：{}", DateUtil.date());
         UserCheckInfoDTO userCheckInfoDTO = new UserCheckInfoDTO();
         userCheckInfoDTO.setUsername(username);
         userCheckInfoDTO.setPassword(password);
-        String checked = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
 
-        // 如果查询成功，则进行登录
-        if (StrUtil.isNotEmpty(checked) && !"-1".equals(checked)) {
-            StpUtil.login(checked);
+        String checked = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
+        log.warn("login-check: {}", checked);
+        R<?> result = JSONUtil.toBean(checked, R.class);
+
+        if (result.checkSuccess()) {
+            StpUtil.login(result.getData());
+            return R.ok();
         }
+        return result;
     }
 
     @GetMapping("/logout")

@@ -2,8 +2,13 @@ package org.travis.auth;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.AutoConfigurationExcludeFilter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.TypeExcludeFilter;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.net.InetAddress;
@@ -19,7 +24,17 @@ import java.util.Arrays;
  */
 @Slf4j
 @SpringBootApplication
-@EnableFeignClients(basePackages = "org.travis.api.client")
+@EnableFeignClients(basePackages = "org.travis.api")
+@ComponentScan("org.travis.api")
+@ComponentScan(
+        excludeFilters = {@ComponentScan.Filter(
+                type = FilterType.CUSTOM,
+                classes = {TypeExcludeFilter.class}
+        ), @ComponentScan.Filter(
+                type = FilterType.CUSTOM,
+                classes = {AutoConfigurationExcludeFilter.class}
+        )}
+)
 public class AuthApplication {
     public static void main(String[] args) throws UnknownHostException {
         // Run and get environment variables

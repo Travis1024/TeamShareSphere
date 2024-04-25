@@ -6,7 +6,11 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBucket;
+import org.redisson.api.RedissonClient;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.travis.api.client.team.TeamClient;
@@ -14,6 +18,7 @@ import org.travis.api.dto.team.UserCheckInfoDTO;
 import org.travis.common.domain.R;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 
 /**
  * @ClassName LoginController
@@ -27,6 +32,11 @@ import javax.annotation.Resource;
 public class LoginController {
     @Resource
     private TeamClient teamClient;
+
+    @Resource
+    private RedisTemplate<String, Object> redisTemplate;
+    @Resource
+    private RedissonClient redissonClient;
 
     @GetMapping("/login")
     public void login(@RequestParam("username") String username, @RequestParam("password") String password) {
@@ -52,7 +62,6 @@ public class LoginController {
         StpUtil.logout();
     }
 
-
     @GetMapping("/test1")
     public String test1() {
         String dateStr = DateUtil.date().toDateStr();
@@ -61,12 +70,30 @@ public class LoginController {
         return dateStr;
     }
 
+    @Accessors(chain = true)
+    @Data
+    static class User implements Serializable {
+        private String username;
+        private String password;
+
+        @Override
+        public String toString() {
+            return "User{" +
+                    "username='" + username + '\'' +
+                    ", password='" + password + '\'' +
+                    '}';
+        }
+    }
+
     @GetMapping("/test2")
     public String test2() {
         String dateStr = DateUtil.date().toDateStr();
         log.info("test2");
         log.info("当前时间:{}", dateStr);
-        return dateStr;
+
+        User user = new User().setUsername("sad").setPassword("aaaaaa");
+
+        return user.toString();
     }
 
     @GetMapping("/test3")

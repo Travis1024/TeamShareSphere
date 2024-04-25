@@ -35,7 +35,7 @@ spring:
     sentinel:
       transport:
         dashboard: 127.0.0.1:8080
-        port: 8719
+        port: 8720
       web-context-unify: false
       # Sentinel 规则持久化到 Nacos
       datasource:
@@ -48,4 +48,4 @@ spring:
             groupId: DEFAULT_GROUP
             data-type: json
             ruleType: flow
-            dataId: SentinelFlowRule.json
+            dataId: sentinel-rules.json

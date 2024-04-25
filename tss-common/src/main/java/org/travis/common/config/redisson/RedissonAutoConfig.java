@@ -5,6 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
+import org.redisson.client.codec.Codec;
+import org.redisson.codec.JsonJacksonCodec;
 import org.redisson.config.Config;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -81,6 +83,9 @@ public class RedissonAutoConfig {
                     .setDatabase(database)
                     .setPassword(password);
         }
+        // 配置 redisson 序列化
+        Codec codec = new JsonJacksonCodec();
+        config.setCodec(codec);
         return Redisson.create(config);
     }
 

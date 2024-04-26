@@ -6,6 +6,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +17,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.travis.api.client.team.TeamClient;
 import org.travis.api.dto.team.UserCheckInfoDTO;
+import org.travis.auth.handler.ServiceDegradedHandler;
 import org.travis.common.domain.R;
 import org.travis.common.enums.BizCodeEnum;
+import org.travis.common.exceptions.BadRequestException;
+import org.travis.common.exceptions.CommonException;
 import org.travis.common.exceptions.ServiceDegradedException;
 
 import javax.annotation.Resource;
@@ -68,13 +72,13 @@ public class LoginController {
         StpUtil.logout();
     }
 
+    @SentinelResource(value = "/test1", blockHandlerClass = ServiceDegradedHandler.class, blockHandler = "commonBlockHandler")
     @GetMapping("/test1")
-    public String test1() {
-        String dateStr = DateUtil.date().toDateStr();
-        log.info("test1");
-        log.info("当前时间:{}", dateStr);
-        return dateStr;
+    public String testOne() {
+        log.info("test1 -> 当前时间: {}", DateUtil.date());
+        return "success";
     }
+
 
     @Accessors(chain = true)
     @Data

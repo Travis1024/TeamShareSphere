@@ -24,9 +24,7 @@ public class UserCheckController {
     @PostMapping(value = "/user/check")
     public String checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO) throws InterruptedException {
 
-        log.warn("sleep:{}", DateUtil.date());
-        Thread.sleep(30000);
-        log.warn("sleep:{}", DateUtil.date());
+        log.warn("请求用户名密码校验:{}", DateUtil.date());
 
         if ("throw".equals(userCheckInfoDTO.getUsername())) {
             throw new RuntimeException("测试抛出异常");

@@ -3,6 +3,7 @@ package org.travis.auth.handler;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.travis.common.exceptions.ServiceDegradedException;
 
 /**
  * @ClassName ServiceDegradedHandler
@@ -12,11 +13,9 @@ import org.springframework.stereotype.Component;
  * @Data 2024/4/26
  */
 @Slf4j
-@Component
 public class ServiceDegradedHandler {
-
-    public String commonBlockHandler(BlockException blockException) {
+    public static String commonBlockHandler(BlockException blockException) {
         log.warn("[服务降级-commonBlockHandler] -> {}", blockException.toString());
-        return "「服务降级」请稍后重试";
+        throw new ServiceDegradedException("「服务降级」请稍后重试");
     }
 }

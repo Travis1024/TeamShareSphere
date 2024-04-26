@@ -72,7 +72,7 @@ public class LoginController {
         StpUtil.logout();
     }
 
-    @SentinelResource(value = "/test1", blockHandlerClass = ServiceDegradedHandler.class, blockHandler = "commonBlockHandler")
+    @SentinelResource(value = "test1", blockHandlerClass = ServiceDegradedHandler.class, blockHandler = "commonBlockHandler")
     @GetMapping("/test1")
     public String testOne() {
         log.info("test1 -> 当前时间: {}", DateUtil.date());

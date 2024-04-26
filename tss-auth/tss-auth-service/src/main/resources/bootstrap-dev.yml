@@ -41,13 +41,13 @@ spring:
       web-context-unify: false
       # Sentinel 规则持久化到 Nacos
       datasource:
-        rule1:
+        flow:
           nacos:
+            server-addr: ENC(wrK3GlaYthj0c/PTLAOp9EVcyq3HbDc1Cr4uskYhptU=)
             namespace: 4fd974ce-ac93-46df-bb71-1ac77a9077e8
+            data-id: ${spring.application.name}-flow-rules
+            group-id: SENTINEL_GROUP
+            rule-type: flow
             username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
             password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
-            serverAddr: ENC(wrK3GlaYthj0c/PTLAOp9EVcyq3HbDc1Cr4uskYhptU=)
-            groupId: DEFAULT_GROUP
             data-type: json
-            ruleType: flow
-            dataId: sentinel-rules.json

@@ -1,0 +1,62 @@
+// gogs git 凭证
+def git_auth = "2110f158-ab50-4e6e-a330-cb0364e61452"
+// git url 地址
+def git_url = "http://xxx.xxx.xxx.xxx:10880/TravisDevelopmentTeam/TeamShareSphere.git"
+// 构建版本的名称
+def tag = "v1.0"
+// harbor 私服地址
+def harbor_url = "xxx.xxx.xxx.xxx:8090"
+// harbor 项目名称
+def harbor_project_name = "team_share_sphere"
+// harbor 项目凭证
+def harbor_auth = "86e1e6f7-5845-4226-ab6f-7ec88b08338b"
+// 定义初始镜像名称
+def initImageName = "${module_name}:latest"
+// 定义镜像名称
+def imageName = "${module_name}:${tag}"
+
+
+node {
+    stage('拉取代码') {
+        checkout scmGit(branches: [[name: '*/${branch}']], extensions: [], userRemoteConfigs: [[credentialsId: "${git_auth}", url: "${git_url}"]])
+    }
+    stage('代码审查') {
+        // 定义当前 jenkins 的 SonarQubeScanner 工具
+        def scannerHome = tool 'sonarqube-scanner'
+        // 引用当前 jenkins 的 SonarQube 环境
+        withSonarQubeEnv('sonarqube8.9') {
+            sh '''
+            cd ./${module_name}
+            /root/software/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube-scanner/bin/sonar-scanner
+            '''
+        }
+    }
+    stage('编译并构建镜像') {
+        // 编译安装 父工程模块
+        sh "mvn clean install -N"
+        // 编译安装 公共模块
+        sh "mvn -f tss-common clean install"
+        // 编译安装 API模块
+        sh "mvn -f tss-api clean install"
+        // 编译安装 鉴权模块
+        sh "mvn -f tss-auth clean install"
+        // 编译构建本地镜像
+        sh "mvn -f ${module_name} clean package dockerfile:build"
+        // 给镜像打标签
+        sh "docker tag ${initImageName} ${harbor_url}/${harbor_project_name}/${imageName}"
+    }
+    stage('上传镜像') {
+        withCredentials([usernamePassword(credentialsId: "${harbor_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {
+            // 登录 harbor
+            sh "docker login -u ${username} -p ${password} ${harbor_url}"
+            // 上传镜像到 harbor
+            sh "docker push ${harbor_url}/${harbor_project_name}/${imageName}"
+        }
+    }
+    stage('删除本地镜像') {
+        // 删除初始镜像
+        sh "docker rmi -f ${initImageName}"
+        // 删除本地镜像
+        sh "docker rmi -f ${harbor_url}/${harbor_project_name}/${imageName}"
+    }
+}

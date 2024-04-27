@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.travis</groupId>
             <artifactId>tss-common</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <!-- OpenFeign 远程调用 -->
         <dependency>

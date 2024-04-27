@@ -21,12 +21,12 @@
         <dependency>
             <groupId>org.travis</groupId>
             <artifactId>tss-auth-resource-sdk</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.travis</groupId>
             <artifactId>tss-api</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

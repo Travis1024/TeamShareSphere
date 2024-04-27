@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.travis</groupId>
             <artifactId>tss-auth-gateway-sdk</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.github.xiaoymin</groupId>

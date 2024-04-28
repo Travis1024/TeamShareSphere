@@ -10,6 +10,7 @@ import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -37,7 +38,7 @@ import java.io.Serializable;
 @Slf4j
 @RestController
 public class LoginController {
-    @Resource
+    @DubboReference
     private TeamClient teamClient;
 
     @Resource
@@ -56,15 +57,14 @@ public class LoginController {
         userCheckInfoDTO.setUsername(username);
         userCheckInfoDTO.setPassword(password);
 
-        String checked = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
-        log.warn("login-check: {}", checked);
-        R<?> result = JSONUtil.toBean(checked, R.class);
+        R<Long> result = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
+        log.warn("login-check: {}", result);
 
         if (result.checkSuccess()) {
             StpUtil.login(result.getData());
             return R.ok();
         }
-        return result;
+        return result.autoSetRequestId();
     }
 
     @GetMapping("/logout")

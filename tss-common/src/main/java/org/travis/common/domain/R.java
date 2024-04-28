@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.slf4j.MDC;
 
+import java.io.Serializable;
+
 /**
  * @ClassName R
  * @Description 封装通用返回类
@@ -15,7 +17,7 @@ import org.slf4j.MDC;
  */
 @Data
 @Schema(description = "通用响应结果")
-public class R<T> {
+public class R<T> implements Serializable {
 
     @Schema(description = "业务状态码，200-成功, 其它-失败, 999-未知")
     private int code;
@@ -128,6 +130,18 @@ public class R<T> {
      **/
     public R<T> requestId(String requestId) {
         this.requestId = requestId;
+        return this;
+    }
+
+    /**
+     * @MethodName autoSetRequestId
+     * @Description 自动设置 requestId
+     * @Author travis-wei
+     * @Data 2024/4/27
+     * @Return org.travis.common.domain.R<T>
+     **/
+    public R<T> autoSetRequestId() {
+        this.requestId = MDC.get(SystemConstant.REQUEST_ID_HEADER);
         return this;
     }
 }

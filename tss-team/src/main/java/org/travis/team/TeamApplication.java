@@ -1,11 +1,12 @@
 package org.travis.team;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.core.env.ConfigurableEnvironment;
 
+import java.io.File;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Arrays;
@@ -19,11 +20,24 @@ import java.util.Arrays;
  */
 @Slf4j
 @SpringBootApplication
-@EnableFeignClients(basePackages = "org.travis.api.client")
+@EnableDubbo
 public class TeamApplication {
     public static void main(String[] args) throws UnknownHostException {
+        // Create Spring Application Instance
+        SpringApplication application = new SpringApplication(TeamApplication.class);
+
+        // Modify Dubbo Cache Folder Path
+        application.addInitializers(context -> {
+            ConfigurableEnvironment environment = context.getEnvironment();
+            String appName = environment.getProperty("spring.application.name");
+            String filePath = System.getProperty("user.dir") + File.separator + ".dubbo" + File.separator + appName;
+            System.setProperty("dubbo.meta.cache.filePath", filePath);
+            System.setProperty("dubbo.mapping.cache.filePath", filePath);
+        });
+
         // Run and get environment variables
-        ConfigurableEnvironment environment = SpringApplication.run(TeamApplication.class, args).getEnvironment();
+        ConfigurableEnvironment environment = application.run(args).getEnvironment();
+
         // Judge protocol
         String protocol = environment.getProperty("server.ssl.key-store") != null ? "https" : "http";
 

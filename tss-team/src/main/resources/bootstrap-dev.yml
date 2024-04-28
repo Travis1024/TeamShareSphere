@@ -28,3 +28,17 @@ spring:
             refresh: true
           - data-id: shared-sa-token.yaml
             refresh: true
+
+# Dubbo 配置
+dubbo:
+  application:
+    name: dubbo-team-service
+    qos-enable: false
+  protocol:
+    name: dubbo
+    port: -1
+  registry:
+    address: ENC(JfHyZ4txxK607PwbvD5+gziD0XRuTGh9qqGLUtBPbPQdyuv8QRyfwJQU4mqGyDGDMZ8Re61tnah69G0NBqTecexGw/XZeCKhmu8NPepzNMQ=)
+    group: DEFAULT_GROUP
+    parameters:
+      namespace: 4fd974ce-ac93-46df-bb71-1ac77a9077e8

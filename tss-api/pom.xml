@@ -23,15 +23,11 @@
             <artifactId>tss-common</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- OpenFeign 远程调用 -->
+        <!-- Dubbo 服务依赖 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!--OpenFeign 熔断器，配合 OpenFeign 使用-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>3.2.11</version>
         </dependency>
     </dependencies>
 

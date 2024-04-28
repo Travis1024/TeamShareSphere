@@ -1,11 +1,11 @@
 package org.travis.common.config.mvc.advice;
 
+import org.apache.dubbo.rpc.RpcException;
 import org.travis.common.constants.SystemConstant;
 import org.travis.common.domain.R;
 import org.travis.common.enums.BizCodeEnum;
 import org.travis.common.exceptions.CommonException;
 import org.travis.common.utils.RequestInfoUtil;
-import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
@@ -36,10 +36,10 @@ public class CommonExceptionAdvice {
         return processResponse(exception.getCode(), exception.getMessage());
     }
 
-    @ExceptionHandler(FeignException.class)
-    public Object handleDatabaseException(FeignException exception) {
-        log.error("[Feign远程调用异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), exception.status(), exception);
-        return processResponse(exception.status(), exception.getMessage());
+    @ExceptionHandler(RpcException.class)
+    public Object handleDatabaseException(RpcException exception) {
+        log.error("[Dubbo远程调用异常] -> 异常类:{}, 状态码:{}, 异常信息:", exception.getClass().getName(), exception.getCode(), exception);
+        return processResponse(exception.getCode(), exception.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

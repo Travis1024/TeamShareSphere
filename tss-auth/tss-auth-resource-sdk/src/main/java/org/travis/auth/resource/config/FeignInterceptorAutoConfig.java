@@ -1,12 +1,11 @@
 package org.travis.auth.resource.config;
 
-import feign.Feign;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.travis.auth.resource.interceptor.FeignRequestIdInterceptor;
-import org.travis.auth.resource.interceptor.FeignSameTokenInterceptor;
-import org.travis.auth.resource.interceptor.FeignUserInterceptor;
+// import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+// import org.springframework.context.annotation.Bean;
+// import org.springframework.context.annotation.Configuration;
+// import org.travis.auth.resource.interceptor.FeignRequestIdInterceptor;
+// import org.travis.auth.resource.interceptor.FeignSameTokenInterceptor;
+// import org.travis.auth.resource.interceptor.FeignUserInterceptor;
 
 /**
  * @ClassName FeignInterceptorAutoConfig
@@ -15,21 +14,21 @@ import org.travis.auth.resource.interceptor.FeignUserInterceptor;
  * @Version v1.0
  * @Data 2024/4/21
  */
-@Configuration
-@ConditionalOnClass(Feign.class)
-public class FeignInterceptorAutoConfig {
-    @Bean
-    public FeignUserInterceptor addFeignUserInterceptor() {
-        return new FeignUserInterceptor();
-    }
-
-    @Bean
-    public FeignRequestIdInterceptor addFeignRequestIdInterceptor() {
-        return new FeignRequestIdInterceptor();
-    }
-
-    @Bean
-    public FeignSameTokenInterceptor addFeignSameTokenInterceptor() {
-        return new FeignSameTokenInterceptor();
-    }
-}
+// @Configuration
+// @ConditionalOnClass(Feign.class)
+// public class FeignInterceptorAutoConfig {
+//     @Bean
+//     public FeignUserInterceptor addFeignUserInterceptor() {
+//         return new FeignUserInterceptor();
+//     }
+//
+//     @Bean
+//     public FeignRequestIdInterceptor addFeignRequestIdInterceptor() {
+//         return new FeignRequestIdInterceptor();
+//     }
+//
+//     @Bean
+//     public FeignSameTokenInterceptor addFeignSameTokenInterceptor() {
+//         return new FeignSameTokenInterceptor();
+//     }
+// }

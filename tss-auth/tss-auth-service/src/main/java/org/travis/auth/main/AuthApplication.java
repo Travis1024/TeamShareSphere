@@ -1,4 +1,4 @@
-package org.travis.auth;
+package org.travis.auth.main;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;

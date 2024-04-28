@@ -16,7 +16,7 @@ import org.travis.common.enums.BizCodeEnum;
  * @Data 2024/4/27
  */
 @Slf4j
-@DubboService
+@DubboService(timeout = 3000)
 public class TeamClientImpl implements TeamClient {
     @Override
     public R<Long> checkUserInfoAndPassword(UserCheckInfoDTO userCheckInfoDTO) {

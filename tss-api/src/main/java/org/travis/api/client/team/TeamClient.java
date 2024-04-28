@@ -11,13 +11,6 @@ import org.travis.common.domain.R;
  * @Version v1.0
  * @Data 2024/4/22
  */
-// @Component
-// @FeignClient(value = "team-service", fallbackFactory = TeamClientFallback.class)
-// public interface TeamClient {
-//     @PostMapping(value = "/user/check")
-//     String checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO);
-// }
-
 public interface TeamClient {
     R<Long> checkUserInfoAndPassword(@RequestBody UserCheckInfoDTO userCheckInfoDTO);
 }

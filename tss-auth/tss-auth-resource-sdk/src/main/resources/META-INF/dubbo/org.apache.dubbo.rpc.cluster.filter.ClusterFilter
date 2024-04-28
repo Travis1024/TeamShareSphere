@@ -1,0 +1,3 @@
+DubboRequestIdFilter=org.travis.auth.resource.filter.consumer.DubboRequestIdFilter
+DubboSameTokenFilter=org.travis.auth.resource.filter.consumer.DubboSameTokenFilter
+DubboUserFilter=org.travis.auth.resource.filter.consumer.DubboUserFilter

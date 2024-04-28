@@ -1,8 +1,11 @@
-package org.travis.auth.handler;
+package org.travis.auth.main.handler;
 
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.travis.api.client.team.TeamClient;
+import org.travis.api.dto.team.UserCheckInfoDTO;
+import org.travis.common.domain.R;
 import org.travis.common.exceptions.ServiceDegradedException;
 
 /**

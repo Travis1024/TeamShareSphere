@@ -1,29 +1,19 @@
-package org.travis.auth.controller;
+package org.travis.auth.main.controller;
 
-import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.json.JSONUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.redisson.api.RBucket;
 import org.redisson.api.RedissonClient;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.travis.api.client.team.TeamClient;
 import org.travis.api.dto.team.UserCheckInfoDTO;
-import org.travis.auth.handler.ServiceDegradedHandler;
+import org.travis.auth.main.handler.ServiceDegradedHandler;
 import org.travis.common.domain.R;
-import org.travis.common.enums.BizCodeEnum;
-import org.travis.common.exceptions.BadRequestException;
-import org.travis.common.exceptions.CommonException;
-import org.travis.common.exceptions.ServiceDegradedException;
 
 import javax.annotation.Resource;
 import java.io.Serializable;
@@ -38,9 +28,8 @@ import java.io.Serializable;
 @Slf4j
 @RestController
 public class LoginController {
-    @DubboReference
+    @DubboReference(mock = "org.travis.auth.main.mock.TeamClientMock")
     private TeamClient teamClient;
-
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
     @Resource

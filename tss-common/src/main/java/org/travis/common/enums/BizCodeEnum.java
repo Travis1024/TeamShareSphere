@@ -41,12 +41,8 @@ public enum BizCodeEnum {
     /**
      * 自定义服务错误
      */
-    TOKEN_CHECK_FAILED(901, "token 验证失败"),
-    TOKEN_EXPIRED(902, "token 已过期"),
-    TOKEN_REFRESH(903, "token 可以刷新"),
-    TOKEN_MISSION(904, "token 缺失"),
-    LACK_OF_RESOURCES(905, "物理机资源不充足"),
-    TOKEN_PAYLOAD_INVALID(906, "token 载荷解析失败"),
+    TOKEN_CHECK_FAILED(901, "Token 验证失败"),
+    INTERNAL_TOKEN_CHECK_FAILED(902, "Token 服务内部调用鉴权失败"),
 
     /**
      * 未知错误

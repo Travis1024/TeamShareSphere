@@ -30,3 +30,5 @@ spring:
             refresh: true
           - data-id: shared-dubbo.yaml
             refresh: true
+          - data-id: shared-seata.yaml
+            refresh: true

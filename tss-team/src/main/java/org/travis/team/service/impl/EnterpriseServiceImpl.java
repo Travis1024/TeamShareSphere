@@ -37,4 +37,9 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
     public int insertOrUpdateSelective(Enterprise record) {
         return baseMapper.insertOrUpdateSelective(record);
     }
+
+    @Override
+    public List<Enterprise> queryAll() {
+        return getBaseMapper().selectList(null);
+    }
 }

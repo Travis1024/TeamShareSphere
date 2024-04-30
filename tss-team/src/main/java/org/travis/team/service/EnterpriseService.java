@@ -23,4 +23,5 @@ public interface EnterpriseService extends IService<Enterprise>{
 
     int insertOrUpdateSelective(Enterprise record);
 
+    List<Enterprise> queryAll();
 }

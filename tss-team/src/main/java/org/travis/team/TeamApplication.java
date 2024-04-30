@@ -2,6 +2,7 @@ package org.travis.team;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.ConfigurableEnvironment;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 @Slf4j
 @SpringBootApplication
 @EnableDubbo
+@MapperScan({"org.travis.team.**.mapper"})
 public class TeamApplication {
     public static void main(String[] args) throws UnknownHostException {
         // Create Spring Application Instance

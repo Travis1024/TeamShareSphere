@@ -12,7 +12,7 @@ import javax.annotation.Resource;
 */
 @Slf4j
 @RestController
-@RequestMapping("/user_group")
+@RequestMapping("/userGroup")
 public class UserGroupController {
 
     @Resource

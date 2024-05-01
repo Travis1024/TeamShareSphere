@@ -51,7 +51,8 @@
         <netflix.hystrix.version>2.2.10.RELEASE</netflix.hystrix.version>
         <dubbo.version>3.2.11</dubbo.version>
         <seata.version>2.0.0</seata.version>
-        <shardingsphere.version>5.4.1</shardingsphere.version>
+        <shardingsphere.version>5.2.1</shardingsphere.version>
+        <snakeyaml.version>1.33</snakeyaml.version>
     </properties>
 
     <dependencyManagement>
@@ -159,8 +160,13 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.shardingsphere</groupId>
-                <artifactId>shardingsphere-jdbc-core</artifactId>
+                <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
                 <version>${shardingsphere.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.yaml</groupId>
+                <artifactId>snakeyaml</artifactId>
+                <version>${snakeyaml.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

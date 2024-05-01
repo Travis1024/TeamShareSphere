@@ -32,3 +32,5 @@ spring:
             refresh: true
           - data-id: shared-seata.yaml
             refresh: true
+          - data-id: shared-mybatis.yaml
+            refresh: true

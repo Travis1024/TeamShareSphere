@@ -53,6 +53,7 @@
         <seata.version>2.0.0</seata.version>
         <shardingsphere.version>5.2.1</shardingsphere.version>
         <snakeyaml.version>1.33</snakeyaml.version>
+        <satoken.version>1.37.0</satoken.version>
     </properties>
 
     <dependencyManagement>
@@ -114,19 +115,19 @@
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-redis-jackson</artifactId>
-                <version>1.37.0</version>
+                <version>${satoken.version}</version>
             </dependency>
             <!-- Sa-Token 权限认证，在线文档：https://sa-token.cc -->
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-spring-boot-starter</artifactId>
-                <version>1.37.0</version>
+                <version>${satoken.version}</version>
             </dependency>
             <!-- Sa-Token 权限认证（Reactor响应式集成），在线文档：https://sa-token.cc -->
             <dependency>
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-reactor-spring-boot-starter</artifactId>
-                <version>1.37.0</version>
+                <version>${satoken.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.skywalking</groupId>

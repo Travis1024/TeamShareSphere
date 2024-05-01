@@ -1,5 +1,7 @@
 package org.travis.gateway.filter;
 
+import cn.dev33.satoken.reactor.context.SaReactorHolder;
+import cn.dev33.satoken.reactor.context.SaReactorSyncHolder;
 import cn.dev33.satoken.reactor.filter.SaReactorFilter;
 import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpUtil;
@@ -31,6 +33,8 @@ import javax.annotation.Resource;
 public class MySaReactorFilter extends SaReactorFilter {
     @Resource
     private PathFilterProperties pathFilterProperties;
+    @Resource
+    private SaReactorFilter directPassSaReactorFilter;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
@@ -55,22 +59,23 @@ public class MySaReactorFilter extends SaReactorFilter {
         ServerHttpRequest serverHttpRequest = exchange.getRequest();
         String antPath = serverHttpRequest.getPath().toString();
 
-        ServerHttpRequest newRequest;
-        ServerWebExchange newExchange;
+        // ServerHttpRequest newRequest;
+        // ServerWebExchange newExchange;
 
         if (isExcludePath(antPath)) {
+            // 无需鉴权
             log.info("[Direct Pass] -> URL: {}", antPath);
             // 如果路径无需鉴权，直接放行，添加请求头
-            newRequest = exchange.getRequest().mutate().header(SystemConstant.IS_NEED_AUTH, "NO").build();
-            newExchange = exchange.mutate().request(newRequest).build();
-            return chain.filter(newExchange);
+            // newRequest = exchange.getRequest().mutate().header(SystemConstant.IS_NEED_AUTH, "NO").build();
+            // newExchange = exchange.mutate().request(newRequest).build();
+            return directPassSaReactorFilter.filter(exchange, chain);
+        } else {
+            // 需要鉴权（添加请求头）
+            log.info("[Wait for Authentication] -> URL: {}", antPath);
+            // newRequest = exchange.getRequest().mutate().header(SystemConstant.IS_NEED_AUTH, "YES").build();
+            // newExchange = exchange.mutate().request(newRequest).build();
+            return super.filter(exchange, chain);
         }
-
-        // 需要鉴权（添加请求头）
-        newRequest = exchange.getRequest().mutate().header(SystemConstant.IS_NEED_AUTH, "YES").build();
-        newExchange = exchange.mutate().request(newRequest).build();
-        log.info("[Wait for Authentication] -> URL: {}", antPath);
-        return super.filter(newExchange, chain);
     }
 
 

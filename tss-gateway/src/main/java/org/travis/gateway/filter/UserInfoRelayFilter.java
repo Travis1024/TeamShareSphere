@@ -28,8 +28,7 @@ public class UserInfoRelayFilter implements GlobalFilter {
         /**
          * 处于未登录状态
          */
-        String isNeedAuth = exchange.getRequest().getHeaders().get(SystemConstant.IS_NEED_AUTH).get(0);
-        if ("NO".equals(isNeedAuth) || !StpUtil.isLogin()) {
+        if (!StpUtil.isLogin()) {
             return chain.filter(exchange);
         }
 

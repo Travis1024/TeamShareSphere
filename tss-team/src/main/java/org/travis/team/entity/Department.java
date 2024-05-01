@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "tss_team.team_department")
+@TableName(value = "team_department")
 public class Department extends com.baomidou.mybatisplus.extension.activerecord.Model<Department> implements Serializable {
     /**
      * ID

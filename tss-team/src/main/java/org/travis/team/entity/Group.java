@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "tss_team.team_group")
+@TableName(value = "team_group")
 public class Group extends com.baomidou.mybatisplus.extension.activerecord.Model<Group> implements Serializable {
     /**
      * ID

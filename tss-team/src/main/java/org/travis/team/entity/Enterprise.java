@@ -26,7 +26,7 @@ import lombok.experimental.Accessors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "tss_team.team_enterprise")
+@TableName(value = "team_enterprise")
 public class Enterprise extends com.baomidou.mybatisplus.extension.activerecord.Model<Enterprise> implements Serializable {
     /**
      * ID

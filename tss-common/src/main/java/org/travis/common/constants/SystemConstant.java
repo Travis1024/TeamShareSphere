@@ -27,7 +27,7 @@ public class SystemConstant {
     /**
      * 请求头字段 - 是否需要鉴权
      */
-    public static final String IS_NEED_AUTH = "is-need-auth";
+    // public static final String IS_NEED_AUTH = "is-need-auth";
     /**
      * 标记「异常响应」已处理
      */

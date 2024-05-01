@@ -50,3 +50,4 @@ log_dir_IS_UNDEFINED/
 skywalking-agent/
 tips.md
 doc/
+.dubbo/

@@ -3,7 +3,9 @@ package org.travis.team.service;
 import java.util.List;
 import org.travis.team.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
-    /**
+import org.travis.team.pojo.vo.UserSlimVO;
+
+/**
  * @ClassName UserService
  * @Description TODO
  * @Author travis-wei
@@ -23,4 +25,7 @@ public interface UserService extends IService<User>{
 
     int insertOrUpdateSelective(User record);
 
+    User queryUserById(long userId);
+
+    UserSlimVO querySlimUserById(long userId);
 }

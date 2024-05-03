@@ -2,6 +2,9 @@ package org.travis.common.config.mybatis;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.baomidou.mybatisplus.core.incrementer.ImadcnIdentifierGenerator;
+import com.imadcn.framework.idworker.common.SerializeStrategy;
+import com.imadcn.framework.idworker.config.ApplicationConfiguration;
+import com.imadcn.framework.idworker.config.ZookeeperConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +23,10 @@ public class IdWorkerAutoConfig {
 
     @Bean
     public IdentifierGenerator getIdGenerator() {
-        // ZookeeperConfiguration zookeeperConfiguration = new ZookeeperConfiguration();
-        // zookeeperConfiguration.setServerLists(zookeeperAddr);
-        // ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
-        // applicationConfiguration.setSerialize(SerializeStrategy.SERIALIZE_JSON_JACKSON);
-        // return new ImadcnIdentifierGenerator(zookeeperConfiguration, applicationConfiguration);
-        return new ImadcnIdentifierGenerator(zookeeperAddr);
+        ZookeeperConfiguration zookeeperConfiguration = new ZookeeperConfiguration();
+        zookeeperConfiguration.setServerLists(zookeeperAddr);
+        ApplicationConfiguration applicationConfiguration = new ApplicationConfiguration();
+        applicationConfiguration.setSerialize(SerializeStrategy.SERIALIZE_JSON_JACKSON);
+        return new ImadcnIdentifierGenerator(zookeeperConfiguration, applicationConfiguration);
     }
 }

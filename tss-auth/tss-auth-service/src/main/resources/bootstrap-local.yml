@@ -1,0 +1,53 @@
+--- # Nacos 服务注册与发现中心
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.0.155:8848
+      discovery:
+        group: DEFAULT_GROUP
+        namespace: 91713fdf-db22-4127-98b6-112e22f27907
+        username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
+        password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
+
+--- # Nacos 配置中心
+spring:
+  cloud:
+    nacos:
+      server-addr: 192.168.0.155:8848
+      config:
+        file-extension: yaml
+        group: DEFAULT_GROUP
+        namespace: 91713fdf-db22-4127-98b6-112e22f27907
+        username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
+        password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
+        shared-configs:
+          # Nacos 共享配置
+          - data-id: shared-spring.yaml
+            refresh: true
+          - data-id: shared-redis.yaml
+            refresh: true
+          - data-id: shared-sa-token.yaml
+            refresh: true
+          - data-id: shared-dubbo.yaml
+            refresh: true
+
+--- # Sentinel 配置信息
+spring:
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+        port: 8720
+      web-context-unify: false
+      # Sentinel 规则持久化到 Nacos
+      datasource:
+        flow:
+          nacos:
+            server-addr: 192.168.0.155:8848
+            namespace: 91713fdf-db22-4127-98b6-112e22f27907
+            data-id: ${spring.application.name}-flow-rules
+            group-id: SENTINEL_GROUP
+            rule-type: flow
+            username: ENC(RQo0l+L8j8xzsjHSd6Wg7w==)
+            password: ENC(ERndxuGV456jsUj3J3W+wO5g1VDPg+b4)
+            data-type: json

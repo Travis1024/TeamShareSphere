@@ -27,6 +27,13 @@
             <groupId>org.travis</groupId>
             <artifactId>tss-api</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <!--和 sharding-jdbc 中依赖冲突-->
+                <exclusion>
+                    <groupId>org.antlr</groupId>
+                    <artifactId>antlr4</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,10 +73,10 @@
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
         </dependency>
+        <!--配合 idworker + Zookeeper 使用-->
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-client</artifactId>
-            <version>5.0.0</version>
         </dependency>
     </dependencies>
 

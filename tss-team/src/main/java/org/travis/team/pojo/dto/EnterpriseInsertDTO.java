@@ -38,12 +38,6 @@ public class EnterpriseInsertDTO implements Serializable {
     private String description;
 
     /**
-     * 企业管理者名字
-     */
-    @Schema(description="企业管理者名字")
-    private String managerName;
-
-    /**
      * 企业管理者联系电话
      */
     @Schema(description="企业管理者联系电话")

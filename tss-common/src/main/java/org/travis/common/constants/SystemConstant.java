@@ -37,11 +37,11 @@ public class SystemConstant {
     /**
      * 数据库表字段 - 创建时间
      */
-    public static final String DATA_FIELD_NAME_CREATE_TIME = "create_time";
+    public static final String DATA_FIELD_NAME_CREATE_TIME = "createTime";
     /**
-     * 数据库表字段 - 创建时间
+     * 数据库表字段 - 更新时间
      */
-    public static final String DATA_FIELD_NAME_UPDATE_TIME = "update_time";
+    public static final String DATA_FIELD_NAME_UPDATE_TIME = "updateTime";
     /**
      * 数据库表字段 - 创建人（creator）
      */
@@ -50,4 +50,8 @@ public class SystemConstant {
      * 数据库表字段 - 更新人（updater）
      */
     public static final String DATA_FIELD_NAME_UPDATER = "updater";
+    /**
+     * 数据库表字段 - 逻辑删除: 0-未删除、1-已删除（is_deleted）
+     */
+    public static final String DATA_FIELD_NAME_IS_DELETED = "isDeleted";
 }

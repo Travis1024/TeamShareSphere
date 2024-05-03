@@ -31,7 +31,7 @@ public class UserDepartment extends com.baomidou.mybatisplus.extension.activerec
     /**
      * ID
      */
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @Schema(description="ID")
     private Long id;
 

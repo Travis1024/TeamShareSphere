@@ -9,6 +9,7 @@ import org.springframework.boot.context.TypeExcludeFilter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.travis.common.config.mybatis.IdWorkerAutoConfig;
 
 import java.io.File;
 import java.net.InetAddress;
@@ -23,7 +24,7 @@ import java.util.Arrays;
  * @Data 2024/4/21
  */
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(exclude = {IdWorkerAutoConfig.class})
 @EnableDubbo
 @ComponentScan("org.travis.api")
 @ComponentScan(

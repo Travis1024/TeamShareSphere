@@ -3,7 +3,7 @@
 <mapper namespace="org.travis.team.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="org.travis.team.entity.User">
     <!--@mbg.generated-->
-    <!--@Table tss_team.team_user-->
+    <!--@Table team_user-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -18,7 +18,7 @@
     <result column="district" jdbcType="VARCHAR" property="district" />
     <result column="emergency_contact_name" jdbcType="VARCHAR" property="emergencyContactName" />
     <result column="emergency_contact_phone" jdbcType="VARCHAR" property="emergencyContactPhone" />
-    <result column="is_deleted" jdbcType="BIGINT" property="isDeleted" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="updater" jdbcType="BIGINT" property="updater" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -32,7 +32,7 @@
   </sql>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update tss_team.team_user
+    update team_user
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="username = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
@@ -101,7 +101,7 @@
       </trim>
       <trim prefix="is_deleted = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=BIGINT}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=TINYINT}
         </foreach>
       </trim>
       <trim prefix="updater = case" suffix="end,">
@@ -132,7 +132,7 @@
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update tss_team.team_user
+    update team_user
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="username = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
@@ -228,7 +228,7 @@
       <trim prefix="is_deleted = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
           <if test="item.isDeleted != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=BIGINT}
+            when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=TINYINT}
           </if>
         </foreach>
       </trim>
@@ -268,7 +268,7 @@
   </update>
   <insert id="batchInsert" parameterType="map">
     <!--@mbg.generated-->
-    insert into tss_team.team_user
+    insert into team_user
     (id, username, `password`, phone, email, birthday, real_name, icon, gender, province,
       city, district, emergency_contact_name, emergency_contact_phone, is_deleted, updater,
       creator, update_time, create_time)
@@ -285,7 +285,7 @@
   </insert>
   <insert id="insertOrUpdate" parameterType="org.travis.team.entity.User">
     <!--@mbg.generated-->
-    insert into tss_team.team_user
+    insert into team_user
     (id, username, `password`, phone, email, birthday, real_name, icon, gender, province,
       city, district, emergency_contact_name, emergency_contact_phone, is_deleted, updater,
       creator, update_time, create_time)
@@ -312,7 +312,7 @@
     district = #{district,jdbcType=VARCHAR},
     emergency_contact_name = #{emergencyContactName,jdbcType=VARCHAR},
     emergency_contact_phone = #{emergencyContactPhone,jdbcType=VARCHAR},
-    is_deleted = #{isDeleted,jdbcType=BIGINT},
+    is_deleted = #{isDeleted,jdbcType=TINYINT},
     updater = #{updater,jdbcType=BIGINT},
     creator = #{creator,jdbcType=BIGINT},
     update_time = #{updateTime,jdbcType=TIMESTAMP},
@@ -320,7 +320,7 @@
   </insert>
   <insert id="insertOrUpdateSelective" parameterType="org.travis.team.entity.User">
     <!--@mbg.generated-->
-    insert into tss_team.team_user
+    insert into team_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -485,7 +485,7 @@
         emergency_contact_phone = #{emergencyContactPhone,jdbcType=VARCHAR},
       </if>
       <if test="isDeleted != null">
-        is_deleted = #{isDeleted,jdbcType=BIGINT},
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
       </if>
       <if test="updater != null">
         updater = #{updater,jdbcType=BIGINT},

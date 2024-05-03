@@ -6,7 +6,7 @@ import org.travis.team.service.GroupService;
 import javax.annotation.Resource;
 
 /**
-* (tss_team.team_group)表控制层
+* (team_group)表控制层
 *
 * @author travis-wei
 */

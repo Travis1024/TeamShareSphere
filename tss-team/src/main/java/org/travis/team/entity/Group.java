@@ -31,7 +31,7 @@ public class Group extends com.baomidou.mybatisplus.extension.activerecord.Model
     /**
      * ID
      */
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @Schema(description="ID")
     private Long id;
 

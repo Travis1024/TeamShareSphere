@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.travis.team.mapper.EnterpriseMapper">
-  <resultMap id="BaseResultMap" type="org.travis.team.entity.Enterprise">
+<mapper namespace="org.travis.team.mapper.UserEnterpriseMapper">
+  <resultMap id="BaseResultMap" type="org.travis.team.entity.UserEnterprise">
     <!--@mbg.generated-->
-    <!--@Table tss_team.team_enterprise-->
+    <!--@Table team_user_enterprise-->
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="manager_id" jdbcType="BIGINT" property="managerId" />
-    <result column="manager_name" jdbcType="VARCHAR" property="managerName" />
-    <result column="manager_phone" jdbcType="VARCHAR" property="managerPhone" />
-    <result column="manager_email" jdbcType="VARCHAR" property="managerEmail" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="employee_number" jdbcType="VARCHAR" property="employeeNumber" />
+    <result column="role" jdbcType="TINYINT" property="role" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="updater" jdbcType="BIGINT" property="updater" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
@@ -19,41 +17,31 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, `name`, description, manager_id, manager_name, manager_phone, manager_email, 
-    is_deleted, updater, creator, update_time, create_time
+    id, user_id, enterprise_id, employee_number, `role`, is_deleted, updater, creator,
+    update_time, create_time
   </sql>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update tss_team.team_enterprise
+    update team_user_enterprise
     <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`name` = case" suffix="end,">
+      <trim prefix="user_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
         </foreach>
       </trim>
-      <trim prefix="description = case" suffix="end,">
+      <trim prefix="enterprise_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.description,jdbcType=VARCHAR}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.enterpriseId,jdbcType=BIGINT}
         </foreach>
       </trim>
-      <trim prefix="manager_id = case" suffix="end,">
+      <trim prefix="employee_number = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.managerId,jdbcType=BIGINT}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.employeeNumber,jdbcType=VARCHAR}
         </foreach>
       </trim>
-      <trim prefix="manager_name = case" suffix="end,">
+      <trim prefix="`role` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.managerName,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="manager_phone = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.managerPhone,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="manager_email = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.managerEmail,jdbcType=VARCHAR}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.role,jdbcType=TINYINT}
         </foreach>
       </trim>
       <trim prefix="is_deleted = case" suffix="end,">
@@ -89,47 +77,33 @@
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update tss_team.team_enterprise
+    update team_user_enterprise
     <trim prefix="set" suffixOverrides=",">
-      <trim prefix="`name` = case" suffix="end,">
+      <trim prefix="user_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.name != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+          <if test="item.userId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
-      <trim prefix="description = case" suffix="end,">
+      <trim prefix="enterprise_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.description != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.description,jdbcType=VARCHAR}
+          <if test="item.enterpriseId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.enterpriseId,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
-      <trim prefix="manager_id = case" suffix="end,">
+      <trim prefix="employee_number = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.managerId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.managerId,jdbcType=BIGINT}
+          <if test="item.employeeNumber != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.employeeNumber,jdbcType=VARCHAR}
           </if>
         </foreach>
       </trim>
-      <trim prefix="manager_name = case" suffix="end,">
+      <trim prefix="`role` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.managerName != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.managerName,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="manager_phone = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.managerPhone != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.managerPhone,jdbcType=VARCHAR}
-          </if>
-        </foreach>
-      </trim>
-      <trim prefix="manager_email = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          <if test="item.managerEmail != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.managerEmail,jdbcType=VARCHAR}
+          <if test="item.role != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.role,jdbcType=TINYINT}
           </if>
         </foreach>
       </trim>
@@ -176,67 +150,57 @@
   </update>
   <insert id="batchInsert" parameterType="map">
     <!--@mbg.generated-->
-    insert into tss_team.team_enterprise
-    (id, `name`, description, manager_id, manager_name, manager_phone, manager_email, 
-      is_deleted, updater, creator, update_time, create_time)
+    insert into team_user_enterprise
+    (id, user_id, enterprise_id, employee_number, `role`, is_deleted, updater, creator,
+      update_time, create_time)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR}, 
-        #{item.managerId,jdbcType=BIGINT}, #{item.managerName,jdbcType=VARCHAR}, #{item.managerPhone,jdbcType=VARCHAR}, 
-        #{item.managerEmail,jdbcType=VARCHAR}, #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT}, 
-        #{item.creator,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createTime,jdbcType=TIMESTAMP}
-        )
+      (#{item.id,jdbcType=BIGINT}, #{item.userId,jdbcType=BIGINT}, #{item.enterpriseId,jdbcType=BIGINT},
+        #{item.employeeNumber,jdbcType=VARCHAR}, #{item.role,jdbcType=TINYINT}, #{item.isDeleted,jdbcType=TINYINT},
+        #{item.updater,jdbcType=BIGINT}, #{item.creator,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP},
+        #{item.createTime,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" parameterType="org.travis.team.entity.Enterprise">
+  <insert id="insertOrUpdate" parameterType="org.travis.team.entity.UserEnterprise">
     <!--@mbg.generated-->
-    insert into tss_team.team_enterprise
-    (id, `name`, description, manager_id, manager_name, manager_phone, manager_email, 
-      is_deleted, updater, creator, update_time, create_time)
+    insert into team_user_enterprise
+    (id, user_id, enterprise_id, employee_number, `role`, is_deleted, updater, creator,
+      update_time, create_time)
     values
-    (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{managerId,jdbcType=BIGINT}, #{managerName,jdbcType=VARCHAR}, #{managerPhone,jdbcType=VARCHAR}, 
-      #{managerEmail,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT}, 
-      #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
-      )
-    on duplicate key update 
-    id = #{id,jdbcType=BIGINT}, 
-    `name` = #{name,jdbcType=VARCHAR}, 
-    description = #{description,jdbcType=VARCHAR}, 
-    manager_id = #{managerId,jdbcType=BIGINT}, 
-    manager_name = #{managerName,jdbcType=VARCHAR}, 
-    manager_phone = #{managerPhone,jdbcType=VARCHAR}, 
-    manager_email = #{managerEmail,jdbcType=VARCHAR}, 
-    is_deleted = #{isDeleted,jdbcType=TINYINT}, 
-    updater = #{updater,jdbcType=BIGINT}, 
-    creator = #{creator,jdbcType=BIGINT}, 
-    update_time = #{updateTime,jdbcType=TIMESTAMP}, 
+    (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT},
+      #{employeeNumber,jdbcType=VARCHAR}, #{role,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT},
+      #{updater,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP},
+      #{createTime,jdbcType=TIMESTAMP})
+    on duplicate key update
+    id = #{id,jdbcType=BIGINT},
+    user_id = #{userId,jdbcType=BIGINT},
+    enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+    employee_number = #{employeeNumber,jdbcType=VARCHAR},
+    `role` = #{role,jdbcType=TINYINT},
+    is_deleted = #{isDeleted,jdbcType=TINYINT},
+    updater = #{updater,jdbcType=BIGINT},
+    creator = #{creator,jdbcType=BIGINT},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
     create_time = #{createTime,jdbcType=TIMESTAMP}
   </insert>
-  <insert id="insertOrUpdateSelective" parameterType="org.travis.team.entity.Enterprise">
+  <insert id="insertOrUpdateSelective" parameterType="org.travis.team.entity.UserEnterprise">
     <!--@mbg.generated-->
-    insert into tss_team.team_enterprise
+    insert into team_user_enterprise
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
       </if>
-      <if test="name != null">
-        `name`,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="description != null">
-        description,
+      <if test="enterpriseId != null">
+        enterprise_id,
       </if>
-      <if test="managerId != null">
-        manager_id,
+      <if test="employeeNumber != null">
+        employee_number,
       </if>
-      <if test="managerName != null">
-        manager_name,
-      </if>
-      <if test="managerPhone != null">
-        manager_phone,
-      </if>
-      <if test="managerEmail != null">
-        manager_email,
+      <if test="role != null">
+        `role`,
       </if>
       <if test="isDeleted != null">
         is_deleted,
@@ -259,23 +223,17 @@
       <if test="id != null">
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
       </if>
-      <if test="managerId != null">
-        #{managerId,jdbcType=BIGINT},
+      <if test="employeeNumber != null">
+        #{employeeNumber,jdbcType=VARCHAR},
       </if>
-      <if test="managerName != null">
-        #{managerName,jdbcType=VARCHAR},
-      </if>
-      <if test="managerPhone != null">
-        #{managerPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="managerEmail != null">
-        #{managerEmail,jdbcType=VARCHAR},
+      <if test="role != null">
+        #{role,jdbcType=TINYINT},
       </if>
       <if test="isDeleted != null">
         #{isDeleted,jdbcType=TINYINT},
@@ -293,28 +251,22 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
-    on duplicate key update 
+    on duplicate key update
     <trim suffixOverrides=",">
       <if test="id != null">
         id = #{id,jdbcType=BIGINT},
       </if>
-      <if test="name != null">
-        `name` = #{name,jdbcType=VARCHAR},
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
       </if>
-      <if test="managerId != null">
-        manager_id = #{managerId,jdbcType=BIGINT},
+      <if test="employeeNumber != null">
+        employee_number = #{employeeNumber,jdbcType=VARCHAR},
       </if>
-      <if test="managerName != null">
-        manager_name = #{managerName,jdbcType=VARCHAR},
-      </if>
-      <if test="managerPhone != null">
-        manager_phone = #{managerPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="managerEmail != null">
-        manager_email = #{managerEmail,jdbcType=VARCHAR},
+      <if test="role != null">
+        `role` = #{role,jdbcType=TINYINT},
       </if>
       <if test="isDeleted != null">
         is_deleted = #{isDeleted,jdbcType=TINYINT},

@@ -1,11 +1,14 @@
 package org.travis.team.service.impl;
 
+import cn.dev33.satoken.stp.StpUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.travis.team.entity.Enterprise;
 import org.travis.team.mapper.EnterpriseMapper;
+import org.travis.team.pojo.dto.EnterpriseInsertDTO;
 import org.travis.team.service.EnterpriseService;
 /**
  * @ClassName EnterpriseServiceImpl
@@ -41,5 +44,18 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
     @Override
     public List<Enterprise> queryAll() {
         return getBaseMapper().selectList(null);
+    }
+
+    @Override
+    public void insertOne(EnterpriseInsertDTO enterpriseInsertDTO) {
+        Enterprise enterprise = new Enterprise();
+        BeanUtils.copyProperties(enterpriseInsertDTO, enterprise);
+        long userId = StpUtil.getLoginIdAsLong();
+        enterprise.setManagerId(userId);
+
+        int inserted = insertOrUpdate(enterprise);
+        if (inserted != 1) {
+            throw new RuntimeException("企业新增失败!");
+        }
     }
 }

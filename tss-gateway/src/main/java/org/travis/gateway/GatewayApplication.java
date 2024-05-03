@@ -2,8 +2,10 @@ package org.travis.gateway;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.ConfigurableEnvironment;
+import org.travis.common.config.mybatis.IdWorkerAutoConfig;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -17,7 +19,7 @@ import java.util.Arrays;
  * @Data 2024/4/20
  */
 @Slf4j
-@SpringBootApplication
+@SpringBootApplication(exclude = {IdWorkerAutoConfig.class})
 public class GatewayApplication {
     public static void main(String[] args) throws UnknownHostException {
         // Run and get environment variables

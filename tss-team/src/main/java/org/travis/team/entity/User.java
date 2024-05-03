@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
 import java.util.Date;
+
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +33,7 @@ public class User extends com.baomidou.mybatisplus.extension.activerecord.Model<
     /**
      * ID
      */
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @Schema(description="ID")
     private Long id;
 
@@ -132,7 +134,7 @@ public class User extends com.baomidou.mybatisplus.extension.activerecord.Model<
     @TableField(value = "is_deleted")
     @Schema(description="逻辑删除")
     @TableLogic
-    private Long isDeleted;
+    private Integer isDeleted;
 
     /**
      * 更新者

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.travis.team.mapper.UserDepartmentMapper">
-  <resultMap id="BaseResultMap" type="org.travis.team.entity.UserDepartment">
+<mapper namespace="org.travis.team.mapper.UserGroupMapper">
+  <resultMap id="BaseResultMap" type="org.travis.team.entity.UserGroup">
     <!--@mbg.generated-->
-    <!--@Table tss_team.team_user_department-->
+    <!--@Table team_user_group-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="department_id" jdbcType="BIGINT" property="departmentId" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
     <result column="role" jdbcType="TINYINT" property="role" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="updater" jdbcType="BIGINT" property="updater" />
@@ -16,20 +16,20 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    id, user_id, department_id, `role`, is_deleted, updater, creator, update_time, create_time
+    id, user_id, group_id, `role`, is_deleted, updater, creator, update_time, create_time
   </sql>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update tss_team.team_user_department
+    update team_user_group
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="user_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
           when id = #{item.id,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
         </foreach>
       </trim>
-      <trim prefix="department_id = case" suffix="end,">
+      <trim prefix="group_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when id = #{item.id,jdbcType=BIGINT} then #{item.departmentId,jdbcType=BIGINT}
+          when id = #{item.id,jdbcType=BIGINT} then #{item.groupId,jdbcType=BIGINT}
         </foreach>
       </trim>
       <trim prefix="`role` = case" suffix="end,">
@@ -70,7 +70,7 @@
   </update>
   <update id="updateBatchSelective" parameterType="java.util.List">
     <!--@mbg.generated-->
-    update tss_team.team_user_department
+    update team_user_group
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="user_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
@@ -79,10 +79,10 @@
           </if>
         </foreach>
       </trim>
-      <trim prefix="department_id = case" suffix="end,">
+      <trim prefix="group_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          <if test="item.departmentId != null">
-            when id = #{item.id,jdbcType=BIGINT} then #{item.departmentId,jdbcType=BIGINT}
+          <if test="item.groupId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.groupId,jdbcType=BIGINT}
           </if>
         </foreach>
       </trim>
@@ -136,41 +136,40 @@
   </update>
   <insert id="batchInsert" parameterType="map">
     <!--@mbg.generated-->
-    insert into tss_team.team_user_department
-    (id, user_id, department_id, `role`, is_deleted, updater, creator, update_time, create_time
+    insert into team_user_group
+    (id, user_id, group_id, `role`, is_deleted, updater, creator, update_time, create_time
       )
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=BIGINT}, #{item.userId,jdbcType=BIGINT}, #{item.departmentId,jdbcType=BIGINT}, 
-        #{item.role,jdbcType=TINYINT}, #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT}, 
+      (#{item.id,jdbcType=BIGINT}, #{item.userId,jdbcType=BIGINT}, #{item.groupId,jdbcType=BIGINT},
+        #{item.role,jdbcType=TINYINT}, #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT},
         #{item.creator,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createTime,jdbcType=TIMESTAMP}
         )
     </foreach>
   </insert>
-  <insert id="insertOrUpdate" parameterType="org.travis.team.entity.UserDepartment">
+  <insert id="insertOrUpdate" parameterType="org.travis.team.entity.UserGroup">
     <!--@mbg.generated-->
-    insert into tss_team.team_user_department
-    (id, user_id, department_id, `role`, is_deleted, updater, creator, update_time, create_time
+    insert into team_user_group
+    (id, user_id, group_id, `role`, is_deleted, updater, creator, update_time, create_time
       )
     values
-    (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{departmentId,jdbcType=BIGINT}, 
-      #{role,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT}, 
-      #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
-      )
-    on duplicate key update 
-    id = #{id,jdbcType=BIGINT}, 
-    user_id = #{userId,jdbcType=BIGINT}, 
-    department_id = #{departmentId,jdbcType=BIGINT}, 
-    `role` = #{role,jdbcType=TINYINT}, 
-    is_deleted = #{isDeleted,jdbcType=TINYINT}, 
-    updater = #{updater,jdbcType=BIGINT}, 
-    creator = #{creator,jdbcType=BIGINT}, 
-    update_time = #{updateTime,jdbcType=TIMESTAMP}, 
+    (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{role,jdbcType=TINYINT},
+      #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT},
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+    on duplicate key update
+    id = #{id,jdbcType=BIGINT},
+    user_id = #{userId,jdbcType=BIGINT},
+    group_id = #{groupId,jdbcType=BIGINT},
+    `role` = #{role,jdbcType=TINYINT},
+    is_deleted = #{isDeleted,jdbcType=TINYINT},
+    updater = #{updater,jdbcType=BIGINT},
+    creator = #{creator,jdbcType=BIGINT},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
     create_time = #{createTime,jdbcType=TIMESTAMP}
   </insert>
-  <insert id="insertOrUpdateSelective" parameterType="org.travis.team.entity.UserDepartment">
+  <insert id="insertOrUpdateSelective" parameterType="org.travis.team.entity.UserGroup">
     <!--@mbg.generated-->
-    insert into tss_team.team_user_department
+    insert into team_user_group
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -178,8 +177,8 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="departmentId != null">
-        department_id,
+      <if test="groupId != null">
+        group_id,
       </if>
       <if test="role != null">
         `role`,
@@ -208,8 +207,8 @@
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="departmentId != null">
-        #{departmentId,jdbcType=BIGINT},
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
       </if>
       <if test="role != null">
         #{role,jdbcType=TINYINT},
@@ -230,7 +229,7 @@
         #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
-    on duplicate key update 
+    on duplicate key update
     <trim suffixOverrides=",">
       <if test="id != null">
         id = #{id,jdbcType=BIGINT},
@@ -238,8 +237,8 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="departmentId != null">
-        department_id = #{departmentId,jdbcType=BIGINT},
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
       </if>
       <if test="role != null">
         `role` = #{role,jdbcType=TINYINT},

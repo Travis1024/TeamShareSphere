@@ -1,5 +1,6 @@
 package org.travis.common.config.mybatis;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ReflectUtil;
 import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
 import org.apache.ibatis.executor.Executor;
@@ -39,6 +40,10 @@ public class MybatisAutoCompleteInterceptor implements InnerInterceptor {
                 ReflectUtil.setFieldValue(parameter, SystemConstant.DATA_FIELD_NAME_UPDATER, userId);
             }
         }
+        // 判断是否有 update_time 字段
+        if (ReflectUtil.hasField(parameter.getClass(), SystemConstant.DATA_FIELD_NAME_UPDATE_TIME)) {
+            ReflectUtil.setFieldValue(parameter, SystemConstant.DATA_FIELD_NAME_UPDATE_TIME, DateUtil.date());
+        }
     }
 
     private void insertOperation(Object parameter) {
@@ -50,6 +55,14 @@ public class MybatisAutoCompleteInterceptor implements InnerInterceptor {
                 // 添加 creator = 当前处理用户 userId
                 ReflectUtil.setFieldValue(parameter, SystemConstant.DATA_FIELD_NAME_CREATOR, userId);
             }
+        }
+        // 判断是否有 create_time 字段
+        if (ReflectUtil.hasField(parameter.getClass(), SystemConstant.DATA_FIELD_NAME_CREATE_TIME)) {
+            ReflectUtil.setFieldValue(parameter, SystemConstant.DATA_FIELD_NAME_CREATE_TIME, DateUtil.date());
+        }
+        // 判断是否有 is_deleted 字段
+        if (ReflectUtil.hasField(parameter.getClass(), SystemConstant.DATA_FIELD_NAME_IS_DELETED)) {
+            ReflectUtil.setFieldValue(parameter, SystemConstant.DATA_FIELD_NAME_IS_DELETED, 0);
         }
     }
 }

@@ -1,6 +1,7 @@
 package org.travis.team.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -31,7 +32,7 @@ public class Department extends com.baomidou.mybatisplus.extension.activerecord.
     /**
      * ID
      */
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @Schema(description="ID")
     private Long id;
 

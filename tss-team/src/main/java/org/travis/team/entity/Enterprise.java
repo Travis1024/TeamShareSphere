@@ -31,7 +31,7 @@ public class Enterprise extends com.baomidou.mybatisplus.extension.activerecord.
     /**
      * ID
      */
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @Schema(description="ID")
     private Long id;
 

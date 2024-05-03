@@ -54,6 +54,7 @@
         <shardingsphere.version>5.2.1</shardingsphere.version>
         <snakeyaml.version>1.33</snakeyaml.version>
         <satoken.version>1.37.0</satoken.version>
+        <idworker.version>1.5.0</idworker.version>
     </properties>
 
     <dependencyManagement>
@@ -168,6 +169,11 @@
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
                 <version>${snakeyaml.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.imadcn.framework</groupId>
+                <artifactId>idworker</artifactId>
+                <version>${idworker.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

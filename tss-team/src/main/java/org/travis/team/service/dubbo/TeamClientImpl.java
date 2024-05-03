@@ -7,6 +7,10 @@ import org.travis.api.client.team.TeamClient;
 import org.travis.api.dto.team.UserCheckInfoDTO;
 import org.travis.common.domain.R;
 import org.travis.common.enums.BizCodeEnum;
+import org.travis.common.exceptions.BadRequestException;
+import org.travis.team.service.UserService;
+
+import javax.annotation.Resource;
 
 /**
  * @ClassName TeamClientImpl
@@ -18,18 +22,17 @@ import org.travis.common.enums.BizCodeEnum;
 @Slf4j
 @DubboService(timeout = 3000)
 public class TeamClientImpl implements TeamClient {
+    @Resource
+    private UserService userService;
+
     @Override
     public R<Long> checkUserInfoAndPassword(UserCheckInfoDTO userCheckInfoDTO) {
         log.warn("请求用户名密码校验:{}", DateUtil.date());
-
-        if ("throw".equals(userCheckInfoDTO.getUsername())) {
-            throw new RuntimeException("测试抛出异常");
-        }
-
-        if ("admin".equals(userCheckInfoDTO.getUsername()) && "123456".equals(userCheckInfoDTO.getPassword())) {
-            return R.ok(12879709126912940L);
-        } else {
-            return R.error(BizCodeEnum.BAD_REQUEST.getCode(), "用户名或密码错误!");
+        try {
+            Long userId = userService.checkPassword(userCheckInfoDTO.getUsername(), userCheckInfoDTO.getPassword());
+            return R.ok(userId);
+        } catch (RuntimeException e) {
+            return R.error(BizCodeEnum.BAD_REQUEST.getCode(), e.getMessage());
         }
     }
 }

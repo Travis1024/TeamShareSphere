@@ -32,7 +32,7 @@ public class Department extends com.baomidou.mybatisplus.extension.activerecord.
     /**
      * ID
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.INPUT)
     @Schema(description="ID")
     private Long id;
 

@@ -48,4 +48,10 @@ public class EnterpriseInsertDTO implements Serializable {
      */
     @Schema(description="企业管理者邮箱地址")
     private String managerEmail;
+
+    /**
+     * 创建者企业员工号
+     */
+    @Schema(description = "创建者企业员工号")
+    private String employeeNumber;
 }

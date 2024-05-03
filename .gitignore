@@ -51,3 +51,4 @@ skywalking-agent/
 tips.md
 doc/
 .dubbo/
+tmp/

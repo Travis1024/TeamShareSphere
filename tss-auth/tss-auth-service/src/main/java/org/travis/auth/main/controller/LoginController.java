@@ -3,6 +3,7 @@ package org.travis.auth.main.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.date.DateUtil;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
@@ -36,6 +37,7 @@ public class LoginController {
     private RedissonClient redissonClient;
 
     @GetMapping("/login")
+    @Operation(summary = "用户登录")
     public R<?> login(@RequestParam("username") String username, @RequestParam("password") String password) {
         if (StpUtil.isLogin()) {
             return R.ok("用户已登录!");
@@ -49,57 +51,27 @@ public class LoginController {
         R<Long> result = teamClient.checkUserInfoAndPassword(userCheckInfoDTO);
         log.warn("login-check: {}", result);
 
+        // 用户登录成功
         if (result.checkSuccess()) {
             StpUtil.login(result.getData());
             return R.ok();
         }
+        // 用户登录失败
         return result.autoSetRequestId();
     }
 
     @GetMapping("/logout")
+    @Operation(summary = "用户登录状态注销")
     public void logout() {
         StpUtil.logout();
     }
 
+
     @SentinelResource(value = "func-test1", blockHandlerClass = ServiceDegradedHandler.class, blockHandler = "commonBlockHandler")
-    @GetMapping("/test1")
-    public String testOne() {
-        log.info("test1 -> 当前时间: {}", DateUtil.date());
+    @GetMapping("/test")
+    @Operation(summary = "sentinel-测试接口")
+    public String test() {
+        log.info("test -> 当前时间: {}", DateUtil.date());
         return "success";
-    }
-
-
-    @Accessors(chain = true)
-    @Data
-    static class User implements Serializable {
-        private String username;
-        private String password;
-
-        @Override
-        public String toString() {
-            return "User{" +
-                    "username='" + username + '\'' +
-                    ", password='" + password + '\'' +
-                    '}';
-        }
-    }
-
-    @GetMapping("/test2")
-    public String test2() {
-        String dateStr = DateUtil.date().toDateStr();
-        log.info("test2");
-        log.info("当前时间:{}", dateStr);
-
-        User user = new User().setUsername("sad").setPassword("aaaaaa");
-
-        return user.toString();
-    }
-
-    @GetMapping("/test3")
-    public String test3() {
-        String dateStr = DateUtil.date().toDateStr();
-        log.info("test3");
-        log.info("当前时间:{}", dateStr);
-        return dateStr;
     }
 }

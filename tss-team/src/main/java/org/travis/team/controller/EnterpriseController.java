@@ -27,6 +27,7 @@ public class EnterpriseController {
 
 
     @GetMapping("/queryAll")
+    @Operation(summary = "查询所有企业列表信息")
     private List<Enterprise> queryAll() {
         return enterpriseService.queryAll();
     }

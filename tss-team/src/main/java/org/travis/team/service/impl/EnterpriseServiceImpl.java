@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.travis.common.exceptions.DatabaseOperationException;
 import org.travis.team.entity.Enterprise;
 import org.travis.team.mapper.EnterpriseMapper;
 import org.travis.team.pojo.dto.EnterpriseInsertDTO;
@@ -50,12 +51,16 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
     public void insertOne(EnterpriseInsertDTO enterpriseInsertDTO) {
         Enterprise enterprise = new Enterprise();
         BeanUtils.copyProperties(enterpriseInsertDTO, enterprise);
+
+        // 设置当前企业创建用户为企业管理者
         long userId = StpUtil.getLoginIdAsLong();
         enterprise.setManagerId(userId);
 
-        int inserted = insertOrUpdate(enterprise);
-        if (inserted != 1) {
-            throw new RuntimeException("企业新增失败!");
+        // 新增企业信息
+        try {
+            getBaseMapper().insert(enterprise);
+        } catch (RuntimeException re) {
+            throw new DatabaseOperationException(re.getMessage());
         }
     }
 }

@@ -43,6 +43,7 @@ public enum BizCodeEnum {
      */
     TOKEN_CHECK_FAILED(901, "Token 验证失败"),
     INTERNAL_TOKEN_CHECK_FAILED(902, "Token 服务内部调用鉴权失败"),
+    DATABASE_OPERATION_FAILED(920, "数据库操作失败"),
 
     /**
      * 未知错误

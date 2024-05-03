@@ -1,5 +1,6 @@
 package org.travis.team.controller;
 import cn.hutool.core.date.DateUtil;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
@@ -31,7 +32,8 @@ public class EnterpriseController {
     }
 
 
-    @PostMapping("/insertOneTest")
+    @PostMapping("/insert")
+    @Operation(summary = "新增企业信息")
     private void insertOne(@Validated @RequestBody EnterpriseInsertDTO enterpriseInsertDTO) {
         enterpriseService.insertOne(enterpriseInsertDTO);
     }

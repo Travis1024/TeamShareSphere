@@ -21,7 +21,6 @@
         <module>tss-file</module>
         <module>tss-search</module>
         <module>tss-remark</module>
-        <module>tss-minio</module>
         <module>tss-system</module>
     </modules>
 
@@ -56,6 +55,7 @@
         <satoken.version>1.37.0</satoken.version>
         <idworker.version>1.6.0</idworker.version>
         <curator.client.version>5.6.0</curator.client.version>
+        <minio.version>8.5.10</minio.version>
     </properties>
 
     <dependencyManagement>
@@ -181,6 +181,11 @@
                 <groupId>org.apache.curator</groupId>
                 <artifactId>curator-client</artifactId>
                 <version>${curator.client.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -3,6 +3,8 @@ package org.travis.team.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import java.util.Optional;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.transaction.annotation.Transactional;
+import org.travis.api.client.file.FileMinioClient;
 import org.travis.common.exceptions.BadRequestException;
 import org.travis.common.exceptions.DatabaseOperationException;
 import org.travis.team.entity.Enterprise;
@@ -37,6 +40,8 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
     private UserService userService;
     @Resource
     private UserEnterpriseService userEnterpriseService;
+    @DubboReference
+    private FileMinioClient fileMinioClient;
 
     @Override
     public int updateBatch(List<Enterprise> list) {
@@ -100,5 +105,8 @@ public class EnterpriseServiceImpl extends ServiceImpl<EnterpriseMapper, Enterpr
         } catch (RuntimeException re) {
             throw new DatabaseOperationException(re.getMessage());
         }
+
+        // 创建企业对应 Minio 存储桶
+        fileMinioClient.makeMinioBucket(enterprise.getId().toString());
     }
 }

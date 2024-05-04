@@ -26,10 +26,6 @@ spring:
           uri: lb://media-service
           predicates:
             - Path=/media/**
-        - id: minio
-          uri: lb://minio-service
-          predicates:
-            - Path=/minio/**
         - id: remark
           uri: lb://remark-service
           predicates:

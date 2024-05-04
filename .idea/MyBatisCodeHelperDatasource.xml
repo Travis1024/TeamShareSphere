@@ -6,7 +6,7 @@
         <option name="addSchemaName" value="true" />
         <option name="addSerializeUid" value="true" />
         <option name="batchInsert" value="true" />
-        <option name="controllerFolderPath" value="$PROJECT_DIR$/tss-team/src/main/java" />
+        <option name="controllerFolderPath" value="$PROJECT_DIR$/tss-file/src/main/java" />
         <option name="controllerTemplateString" value="&#10;#* @vtlvariable name=&quot;tableName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;entityPackageName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;entityClassName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;servicePackageName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;serviceInterfacePackage&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;serviceClassName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;serviceInterfaceClassName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;mapperPackageName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;mapperClassName&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;controllerPackage&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;tableRemark&quot; type=&quot;java.lang.String&quot; *#&#10;#* @vtlvariable name=&quot;myDate&quot; type=&quot;java.util.Date&quot; *#&#10;#* @vtlvariable name=&quot;simpleDateFormat&quot; type=&quot;java.text.SimpleDateFormat&quot; *#&#10;package $!{controllerPackage};&#10;import $!{entityPackageName}.$!{entityClassName};&#10;###set($realServiceName = $!{serviceClassName}+'Impl')&#10;import $!{servicePackageName}.$!{serviceClassName};&#10;import lombok.extern.slf4j.Slf4j;&#10;import org.springframework.web.bind.annotation.*;&#10;&#10;#set($serviceFirstLower = $!{serviceInterfaceClassName.substring(0,1).toLowerCase()}+$!{serviceInterfaceClassName.substring(1,$!{serviceInterfaceClassName.length()})})&#10;import javax.annotation.Resource;&#10;&#10;/**&#10;* $!{tableRemark}($!{tableName})表控制层&#10;*&#10;* @author travis-wei&#10;*/&#10;@Slf4j&#10;@RestController&#10;@RequestMapping(&quot;/$!{tableName}&quot;)&#10;public class $!{entityClassName}Controller {&#10;&#10;    @Resource&#10;    private $!{serviceInterfaceClassName} $!{serviceFirstLower};&#10;&#10;}" />
         <option name="customizedLombokAnnotation" value="true" />
         <option name="customizedLombokValue" value="@lombok.experimental.Accessors(chain = true)" />
@@ -14,12 +14,12 @@
         <option name="generateService" value="true" />
         <option name="generateServiceInterface" value="true" />
         <option name="insertOnDuplicateKey" value="true" />
-        <option name="javaControllerPackage" value="org.travis.team.controller" />
-        <option name="javaMapperPackage" value="org.travis.team.mapper" />
-        <option name="javaMapperPath" value="$PROJECT_DIR$/tss-team/src/main/java" />
-        <option name="javaModelPackage" value="org.travis.team.entity" />
-        <option name="javaModelPath" value="$PROJECT_DIR$/tss-team/src/main/java" />
-        <option name="lastDatabaseCrudChooseModuleName" value="tss-team" />
+        <option name="javaControllerPackage" value="org.travis.file.controller" />
+        <option name="javaMapperPackage" value="org.travis.file.mapper" />
+        <option name="javaMapperPath" value="$PROJECT_DIR$/tss-file/src/main/java" />
+        <option name="javaModelPackage" value="org.travis.file.entity" />
+        <option name="javaModelPath" value="$PROJECT_DIR$/tss-file/src/main/java" />
+        <option name="lastDatabaseCrudChooseModuleName" value="tss-file" />
         <option name="lombokAllArgConstructor" value="true" />
         <option name="lombokBuilderAnnotation" value="true" />
         <option name="lombokDataAnnotation" value="true" />
@@ -30,6 +30,22 @@
         <option name="modelSuperClass" value="com.baomidou.mybatisplus.extension.activerecord.Model&lt;T&gt;" />
         <option name="moduleNameToPackageAndPathMap">
           <map>
+            <entry key="tss-file">
+              <value>
+                <UserPackageAndPathInfoByModule>
+                  <option name="javaMapperPackage" value="org.travis.file.mapper" />
+                  <option name="javaMapperPath" value="$PROJECT_DIR$/tss-file/src/main/java" />
+                  <option name="javaModelPacakge" value="org.travis.file.entity" />
+                  <option name="javaModelPath" value="$PROJECT_DIR$/tss-file/src/main/java" />
+                  <option name="javaServiceInterfacePackage" value="org.travis.file.service" />
+                  <option name="javaServiceInterfacePath" value="$PROJECT_DIR$/tss-file/src/main/java" />
+                  <option name="javaServicePackage" value="org.travis.file.service.impl" />
+                  <option name="javaServicePath" value="$PROJECT_DIR$/tss-file/src/main/java" />
+                  <option name="xmlPackage" value="mapper" />
+                  <option name="xmlPath" value="$PROJECT_DIR$/tss-file/src/main/resources" />
+                </UserPackageAndPathInfoByModule>
+              </value>
+            </entry>
             <entry key="tss-team">
               <value>
                 <UserPackageAndPathInfoByModule>
@@ -49,9 +65,56 @@
           </map>
         </option>
         <option name="mybatisPlusStaticField" value="true" />
-        <option name="removeTablePreName" value="team_" />
+        <option name="p3CComment" value="true" />
+        <option name="removeTablePreName" value="file_" />
         <option name="tableGenerateConfigs">
           <map>
+            <entry key="tss_file:file_file_info">
+              <value>
+                <TableGenerateConfig>
+                  <option name="batchInsert" value="true" />
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="property" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                      <MyColumnOverride>
+                        <option name="columnName" value="is_deleted" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="insertOnDuplicateKey" value="true" />
+                  <option name="javaModelName" value="FileInfo" />
+                  <option name="moduleName" value="tss-file" />
+                  <option name="updateBatch" value="true" />
+                  <option name="updateBatchSelective" value="true" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
+            <entry key="tss_file:file_file_slice">
+              <value>
+                <TableGenerateConfig>
+                  <option name="batchInsert" value="true" />
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="is_deleted" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="insertOnDuplicateKey" value="true" />
+                  <option name="javaModelName" value="FileSlice" />
+                  <option name="moduleName" value="tss-file" />
+                  <option name="updateBatch" value="true" />
+                  <option name="updateBatchSelective" value="true" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
             <entry key="tss_team:team_department">
               <value>
                 <TableGenerateConfig>
@@ -221,8 +284,8 @@
         <option name="updateBatchSelective" value="true" />
         <option name="useOpenApi" value="true" />
         <option name="userMybatisPlus" value="true" />
-        <option name="xmlMapperPackage" value="mapperxml" />
-        <option name="xmlMapperPath" value="$PROJECT_DIR$/tss-team/src/main/resources" />
+        <option name="xmlMapperPackage" value="mapper" />
+        <option name="xmlMapperPath" value="$PROJECT_DIR$/tss-file/src/main/resources" />
       </ProjectProfile>
     </option>
   </component>

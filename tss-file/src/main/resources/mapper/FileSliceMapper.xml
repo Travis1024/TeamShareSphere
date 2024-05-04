@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.travis.file.mapper.FileSliceMapper">
+  <resultMap id="BaseResultMap" type="org.travis.file.entity.FileSlice">
+    <!--@mbg.generated-->
+    <!--@Table file_file_slice-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="file_id" jdbcType="BIGINT" property="fileId" />
+    <result column="minio_upload_id" jdbcType="VARCHAR" property="minioUploadId" />
+    <result column="minio_upload_url" jdbcType="VARCHAR" property="minioUploadUrl" />
+    <result column="slice_md5" jdbcType="VARCHAR" property="sliceMd5" />
+    <result column="slice_state" jdbcType="INTEGER" property="sliceState" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, file_id, minio_upload_id, minio_upload_url, slice_md5, slice_state, is_deleted,
+    updater, creator, update_time, create_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_file_slice
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="file_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.fileId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="minio_upload_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.minioUploadId,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="minio_upload_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.minioUploadUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="slice_md5 = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.sliceMd5,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="slice_state = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.sliceState,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="is_deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="updater = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updater,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="creator = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.creator,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_file_slice
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="file_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fileId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.fileId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="minio_upload_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.minioUploadId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.minioUploadId,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="minio_upload_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.minioUploadUrl != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.minioUploadUrl,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="slice_md5 = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.sliceMd5 != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.sliceMd5,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="slice_state = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.sliceState != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.sliceState,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isDeleted != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="updater = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updater != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updater,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="creator = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.creator != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.creator,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into file_file_slice
+    (id, file_id, minio_upload_id, minio_upload_url, slice_md5, slice_state, is_deleted,
+      updater, creator, update_time, create_time)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.fileId,jdbcType=BIGINT}, #{item.minioUploadId,jdbcType=VARCHAR},
+        #{item.minioUploadUrl,jdbcType=VARCHAR}, #{item.sliceMd5,jdbcType=VARCHAR}, #{item.sliceState,jdbcType=INTEGER},
+        #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT}, #{item.creator,jdbcType=BIGINT},
+        #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createTime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="org.travis.file.entity.FileSlice">
+    <!--@mbg.generated-->
+    insert into file_file_slice
+    (id, file_id, minio_upload_id, minio_upload_url, slice_md5, slice_state, is_deleted,
+      updater, creator, update_time, create_time)
+    values
+    (#{id,jdbcType=BIGINT}, #{fileId,jdbcType=BIGINT}, #{minioUploadId,jdbcType=VARCHAR},
+      #{minioUploadUrl,jdbcType=VARCHAR}, #{sliceMd5,jdbcType=VARCHAR}, #{sliceState,jdbcType=INTEGER},
+      #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT}, #{creator,jdbcType=BIGINT},
+      #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})
+    on duplicate key update
+    id = #{id,jdbcType=BIGINT},
+    file_id = #{fileId,jdbcType=BIGINT},
+    minio_upload_id = #{minioUploadId,jdbcType=VARCHAR},
+    minio_upload_url = #{minioUploadUrl,jdbcType=VARCHAR},
+    slice_md5 = #{sliceMd5,jdbcType=VARCHAR},
+    slice_state = #{sliceState,jdbcType=INTEGER},
+    is_deleted = #{isDeleted,jdbcType=TINYINT},
+    updater = #{updater,jdbcType=BIGINT},
+    creator = #{creator,jdbcType=BIGINT},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="org.travis.file.entity.FileSlice">
+    <!--@mbg.generated-->
+    insert into file_file_slice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fileId != null">
+        file_id,
+      </if>
+      <if test="minioUploadId != null">
+        minio_upload_id,
+      </if>
+      <if test="minioUploadUrl != null">
+        minio_upload_url,
+      </if>
+      <if test="sliceMd5 != null">
+        slice_md5,
+      </if>
+      <if test="sliceState != null">
+        slice_state,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fileId != null">
+        #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="minioUploadId != null">
+        #{minioUploadId,jdbcType=VARCHAR},
+      </if>
+      <if test="minioUploadUrl != null">
+        #{minioUploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sliceMd5 != null">
+        #{sliceMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="sliceState != null">
+        #{sliceState,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="fileId != null">
+        file_id = #{fileId,jdbcType=BIGINT},
+      </if>
+      <if test="minioUploadId != null">
+        minio_upload_id = #{minioUploadId,jdbcType=VARCHAR},
+      </if>
+      <if test="minioUploadUrl != null">
+        minio_upload_url = #{minioUploadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="sliceMd5 != null">
+        slice_md5 = #{sliceMd5,jdbcType=VARCHAR},
+      </if>
+      <if test="sliceState != null">
+        slice_state = #{sliceState,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

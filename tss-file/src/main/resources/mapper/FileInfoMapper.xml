@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.travis.file.mapper.FileInfoMapper">
+  <resultMap id="BaseResultMap" type="org.travis.file.entity.FileInfo">
+    <!--@mbg.generated-->
+    <!--@Table file_file_info-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="download_url" jdbcType="VARCHAR" property="downloadUrl" />
+    <result column="preview_url" jdbcType="VARCHAR" property="previewUrl" />
+    <result column="size" jdbcType="BIGINT" property="size" />
+    <result column="md5" jdbcType="VARCHAR" property="md5" />
+    <result column="property" jdbcType="TINYINT" property="property" />
+    <result column="content_type" jdbcType="VARCHAR" property="contentType" />
+    <result column="suffix" jdbcType="VARCHAR" property="suffix" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="layer" jdbcType="INTEGER" property="layer" />
+    <result column="layer_id" jdbcType="BIGINT" property="layerId" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `name`, description, download_url, preview_url, `size`, md5, property, content_type,
+    suffix, `state`, layer, layer_id, is_deleted, updater, creator, update_time, create_time
+  </sql>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_file_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.description,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="download_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.downloadUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="preview_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.previewUrl,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`size` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.size,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="md5 = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.md5,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="property = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.property,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="content_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.contentType,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="suffix = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.suffix,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`state` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.state,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="layer = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.layer,jdbcType=INTEGER}
+        </foreach>
+      </trim>
+      <trim prefix="layer_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.layerId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="is_deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=TINYINT}
+        </foreach>
+      </trim>
+      <trim prefix="updater = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updater,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="creator = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.creator,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update file_file_info
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.name != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.name,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="description = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.description != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.description,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="download_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.downloadUrl != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.downloadUrl,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="preview_url = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.previewUrl != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.previewUrl,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`size` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.size != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.size,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="md5 = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.md5 != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.md5,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="property = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.property != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.property,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="content_type = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.contentType != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.contentType,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="suffix = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.suffix != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.suffix,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`state` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.state != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.state,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="layer = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.layer != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.layer,jdbcType=INTEGER}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="layer_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.layerId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.layerId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="is_deleted = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.isDeleted != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.isDeleted,jdbcType=TINYINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="updater = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updater != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updater,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="creator = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.creator != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.creator,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="update_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.updateTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.updateTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="create_time = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.createTime != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.createTime,jdbcType=TIMESTAMP}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=BIGINT}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into file_file_info
+    (id, `name`, description, download_url, preview_url, `size`, md5, property, content_type,
+      suffix, `state`, layer, layer_id, is_deleted, updater, creator, update_time, create_time
+      )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=BIGINT}, #{item.name,jdbcType=VARCHAR}, #{item.description,jdbcType=VARCHAR},
+        #{item.downloadUrl,jdbcType=VARCHAR}, #{item.previewUrl,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT},
+        #{item.md5,jdbcType=VARCHAR}, #{item.property,jdbcType=TINYINT}, #{item.contentType,jdbcType=VARCHAR},
+        #{item.suffix,jdbcType=VARCHAR}, #{item.state,jdbcType=INTEGER}, #{item.layer,jdbcType=INTEGER},
+        #{item.layerId,jdbcType=BIGINT}, #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT},
+        #{item.creator,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createTime,jdbcType=TIMESTAMP}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="org.travis.file.entity.FileInfo">
+    <!--@mbg.generated-->
+    insert into file_file_info
+    (id, `name`, description, download_url, preview_url, `size`, md5, property, content_type,
+      suffix, `state`, layer, layer_id, is_deleted, updater, creator, update_time, create_time
+      )
+    values
+    (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+      #{downloadUrl,jdbcType=VARCHAR}, #{previewUrl,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT},
+      #{md5,jdbcType=VARCHAR}, #{property,jdbcType=TINYINT}, #{contentType,jdbcType=VARCHAR},
+      #{suffix,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{layer,jdbcType=INTEGER},
+      #{layerId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT},
+      #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
+      )
+    on duplicate key update
+    id = #{id,jdbcType=BIGINT},
+    `name` = #{name,jdbcType=VARCHAR},
+    description = #{description,jdbcType=VARCHAR},
+    download_url = #{downloadUrl,jdbcType=VARCHAR},
+    preview_url = #{previewUrl,jdbcType=VARCHAR},
+    `size` = #{size,jdbcType=BIGINT},
+    md5 = #{md5,jdbcType=VARCHAR},
+    property = #{property,jdbcType=TINYINT},
+    content_type = #{contentType,jdbcType=VARCHAR},
+    suffix = #{suffix,jdbcType=VARCHAR},
+    `state` = #{state,jdbcType=INTEGER},
+    layer = #{layer,jdbcType=INTEGER},
+    layer_id = #{layerId,jdbcType=BIGINT},
+    is_deleted = #{isDeleted,jdbcType=TINYINT},
+    updater = #{updater,jdbcType=BIGINT},
+    creator = #{creator,jdbcType=BIGINT},
+    update_time = #{updateTime,jdbcType=TIMESTAMP},
+    create_time = #{createTime,jdbcType=TIMESTAMP}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="org.travis.file.entity.FileInfo">
+    <!--@mbg.generated-->
+    insert into file_file_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="downloadUrl != null">
+        download_url,
+      </if>
+      <if test="previewUrl != null">
+        preview_url,
+      </if>
+      <if test="size != null">
+        `size`,
+      </if>
+      <if test="md5 != null">
+        md5,
+      </if>
+      <if test="property != null">
+        property,
+      </if>
+      <if test="contentType != null">
+        content_type,
+      </if>
+      <if test="suffix != null">
+        suffix,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="layer != null">
+        layer,
+      </if>
+      <if test="layerId != null">
+        layer_id,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="updater != null">
+        updater,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null">
+        #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="previewUrl != null">
+        #{previewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="md5 != null">
+        #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null">
+        #{property,jdbcType=TINYINT},
+      </if>
+      <if test="contentType != null">
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null">
+        #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="layerId != null">
+        #{layerId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="updater != null">
+        #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    on duplicate key update
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null">
+        download_url = #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="previewUrl != null">
+        preview_url = #{previewUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        `size` = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="md5 != null">
+        md5 = #{md5,jdbcType=VARCHAR},
+      </if>
+      <if test="property != null">
+        property = #{property,jdbcType=TINYINT},
+      </if>
+      <if test="contentType != null">
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="suffix != null">
+        suffix = #{suffix,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="layer != null">
+        layer = #{layer,jdbcType=INTEGER},
+      </if>
+      <if test="layerId != null">
+        layer_id = #{layerId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="updater != null">
+        updater = #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

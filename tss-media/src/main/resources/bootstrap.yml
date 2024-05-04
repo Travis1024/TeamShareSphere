@@ -1,0 +1,23 @@
+server:
+  port: 10014
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: media-service
+
+# 日志配置
+logging:
+  file:
+    path: "logs/${spring.application.name}"
+  level:
+    root: info
+
+# 隐私信息加密配置
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

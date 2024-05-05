@@ -27,6 +27,12 @@
             <groupId>org.travis</groupId>
             <artifactId>tss-api</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.seata</groupId>
+                    <artifactId>seata-spring-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -56,6 +62,31 @@
         <dependency>
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-all-deps</artifactId>
+            <exclusions>
+                <!--排除windows32位的系统-->
+                <exclusion>
+                    <groupId>ws.schild</groupId>
+                    <artifactId>jave-nativebin-win32</artifactId>
+                </exclusion>
+                <!--排除windows32位的系统-->
+                <exclusion>
+                    <groupId>ws.schild</groupId>
+                    <artifactId>jave-nativebin-win64</artifactId>
+                </exclusion>
+                <!--排除mac intel的系统-->
+                <exclusion>
+                    <groupId>ws.schild</groupId>
+                    <artifactId>jave-nativebin-osx64</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

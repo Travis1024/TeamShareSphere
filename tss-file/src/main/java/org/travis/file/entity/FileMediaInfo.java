@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * @ClassName FileSlice
+ * @ClassName FileMediaInfo
  * @Description TODO
  * @Author travis-wei
  * @Version v1.0
- * @Data 2024/5/4
+ * @Data 2024/5/5
  */
 @Schema
 @Data
@@ -26,49 +26,35 @@ import lombok.experimental.Accessors;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "file_file_slice")
-public class FileSlice extends com.baomidou.mybatisplus.extension.activerecord.Model<FileSlice> implements Serializable {
+@TableName(value = "file_file_media_info")
+public class FileMediaInfo extends com.baomidou.mybatisplus.extension.activerecord.Model<FileMediaInfo> implements Serializable {
     /**
-     * ID
+     * ID-文件ID
      */
     @TableId(value = "id", type = IdType.INPUT)
-    @Schema(description="ID")
+    @Schema(description="ID-文件ID")
     private Long id;
 
     /**
-     * 切片所属文件ID
+     * 密钥文件minio路径
      */
-    @TableField(value = "file_id")
-    @Schema(description="切片所属文件ID")
-    private Long fileId;
+    @TableField(value = "key_object_name")
+    @Schema(description="密钥文件minio路径")
+    private String keyObjectName;
 
     /**
-     * 切片上传ID
+     * m3u8文件minio路径
      */
-    @TableField(value = "minio_upload_id")
-    @Schema(description="切片上传ID")
-    private String minioUploadId;
+    @TableField(value = "m3u8_object_name")
+    @Schema(description="m3u8文件minio路径")
+    private String m3u8ObjectName;
 
     /**
-     * 切片上传地址
+     * 所属企业ID
      */
-    @TableField(value = "minio_upload_url")
-    @Schema(description="切片上传地址")
-    private String minioUploadUrl;
-
-    /**
-     * 切片MD5
-     */
-    @TableField(value = "slice_md5")
-    @Schema(description="切片MD5")
-    private String sliceMd5;
-
-    /**
-     * 切片上传状态（0-上传异常、1-上传中、2-上传完成）
-     */
-    @TableField(value = "slice_state")
-    @Schema(description="切片上传状态（0-上传异常、1-上传中、2-上传完成）")
-    private Integer sliceState;
+    @TableField(value = "enterprise_id")
+    @Schema(description="所属企业ID")
+    private Long enterpriseId;
 
     /**
      * 逻辑删除
@@ -110,15 +96,11 @@ public class FileSlice extends com.baomidou.mybatisplus.extension.activerecord.M
 
     public static final String COL_ID = "id";
 
-    public static final String COL_FILE_ID = "file_id";
+    public static final String COL_KEY_OBJECT_NAME = "key_object_name";
 
-    public static final String COL_MINIO_UPLOAD_ID = "minio_upload_id";
+    public static final String COL_M3U8_OBJECT_NAME = "m3u8_object_name";
 
-    public static final String COL_MINIO_UPLOAD_URL = "minio_upload_url";
-
-    public static final String COL_SLICE_MD5 = "slice_md5";
-
-    public static final String COL_SLICE_STATE = "slice_state";
+    public static final String COL_ENTERPRISE_ID = "enterprise_id";
 
     public static final String COL_IS_DELETED = "is_deleted";
 

@@ -1,9 +1,6 @@
 package org.travis.file.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.io.Serializable;
@@ -123,10 +120,18 @@ public class FileInfo extends com.baomidou.mybatisplus.extension.activerecord.Mo
     private Long layerId;
 
     /**
+     * 文件所属企业-ID
+     */
+    @TableField(value = "enterprise_id")
+    @Schema(description="文件所属企业ID")
+    private Long enterpriseId;
+
+    /**
      * 逻辑删除
      */
     @TableField(value = "is_deleted")
     @Schema(description="逻辑删除")
+    @TableLogic
     private Integer isDeleted;
 
     /**
@@ -184,6 +189,8 @@ public class FileInfo extends com.baomidou.mybatisplus.extension.activerecord.Mo
     public static final String COL_LAYER = "layer";
 
     public static final String COL_LAYER_ID = "layer_id";
+
+    public static final String COL_ENTERPRISE_ID = "enterprise_id";
 
     public static final String COL_IS_DELETED = "is_deleted";
 

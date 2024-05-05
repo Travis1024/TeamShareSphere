@@ -94,6 +94,30 @@
                 </TableGenerateConfig>
               </value>
             </entry>
+            <entry key="tss_file:file_file_media_info">
+              <value>
+                <TableGenerateConfig>
+                  <option name="batchInsert" value="true" />
+                  <option name="columnOverrideList">
+                    <list>
+                      <MyColumnOverride>
+                        <option name="columnName" value="is_deleted" />
+                        <option name="javaType" value="java.lang.Integer" />
+                      </MyColumnOverride>
+                    </list>
+                  </option>
+                  <option name="generatedKey" value="" />
+                  <option name="insertOnDuplicateKey" value="true" />
+                  <option name="javaModelName" value="FileMediaInfo" />
+                  <option name="moduleName" value="tss-file" />
+                  <option name="sequenceColumn" value="" />
+                  <option name="sequenceId" value="" />
+                  <option name="updateBatch" value="true" />
+                  <option name="updateBatchSelective" value="true" />
+                  <option name="useActualColumnName" value="false" />
+                </TableGenerateConfig>
+              </value>
+            </entry>
             <entry key="tss_file:file_file_slice">
               <value>
                 <TableGenerateConfig>

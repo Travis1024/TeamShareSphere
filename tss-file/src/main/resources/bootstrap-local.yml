@@ -34,3 +34,7 @@ spring:
             refresh: true
           - data-id: shared-mybatis.yaml
             refresh: true
+          - data-id: shared-rocketmq.yaml
+            refresh: true
+          - data-id: shared-minio.yaml
+            refresh: true

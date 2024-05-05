@@ -21,7 +21,7 @@ springdoc:
       paths-to-match:
         - '/**'
       packages-to-scan:
-        - org.travis.auth.controller
+        - org.travis.auth.main.controller
 
 # swagger配置
 knife4j:

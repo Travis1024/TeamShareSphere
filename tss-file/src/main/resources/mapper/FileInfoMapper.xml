@@ -17,6 +17,7 @@
     <result column="state" jdbcType="INTEGER" property="state" />
     <result column="layer" jdbcType="INTEGER" property="layer" />
     <result column="layer_id" jdbcType="BIGINT" property="layerId" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="updater" jdbcType="BIGINT" property="updater" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
@@ -26,7 +27,7 @@
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, `name`, description, download_url, preview_url, `size`, md5, property, content_type,
-    suffix, `state`, layer, layer_id, is_deleted, updater, creator, update_time, create_time
+    suffix, `state`, layer, layer_id, enterprise_id, is_deleted, updater, creator, update_time, create_time
   </sql>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
@@ -90,6 +91,11 @@
       <trim prefix="layer_id = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
           when id = #{item.id,jdbcType=BIGINT} then #{item.layerId,jdbcType=BIGINT}
+        </foreach>
+      </trim>
+      <trim prefix="enterprise_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=BIGINT} then #{item.enterpriseId,jdbcType=BIGINT}
         </foreach>
       </trim>
       <trim prefix="is_deleted = case" suffix="end,">
@@ -211,6 +217,13 @@
           </if>
         </foreach>
       </trim>
+      <trim prefix="enterprise_id = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.enterpriseId != null">
+            when id = #{item.id,jdbcType=BIGINT} then #{item.enterpriseId,jdbcType=BIGINT}
+          </if>
+        </foreach>
+      </trim>
       <trim prefix="is_deleted = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
           <if test="item.isDeleted != null">
@@ -256,7 +269,7 @@
     <!--@mbg.generated-->
     insert into file_file_info
     (id, `name`, description, download_url, preview_url, `size`, md5, property, content_type,
-      suffix, `state`, layer, layer_id, is_deleted, updater, creator, update_time, create_time
+      suffix, `state`, layer, layer_id, enterprise_id, is_deleted, updater, creator, update_time, create_time
       )
     values
     <foreach collection="list" item="item" separator=",">
@@ -264,7 +277,7 @@
         #{item.downloadUrl,jdbcType=VARCHAR}, #{item.previewUrl,jdbcType=VARCHAR}, #{item.size,jdbcType=BIGINT},
         #{item.md5,jdbcType=VARCHAR}, #{item.property,jdbcType=TINYINT}, #{item.contentType,jdbcType=VARCHAR},
         #{item.suffix,jdbcType=VARCHAR}, #{item.state,jdbcType=INTEGER}, #{item.layer,jdbcType=INTEGER},
-        #{item.layerId,jdbcType=BIGINT}, #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT},
+        #{item.layerId,jdbcType=BIGINT}, #{item.enterpriseId,jdbcType=BIGINT}, #{item.isDeleted,jdbcType=TINYINT}, #{item.updater,jdbcType=BIGINT},
         #{item.creator,jdbcType=BIGINT}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.createTime,jdbcType=TIMESTAMP}
         )
     </foreach>
@@ -273,14 +286,14 @@
     <!--@mbg.generated-->
     insert into file_file_info
     (id, `name`, description, download_url, preview_url, `size`, md5, property, content_type,
-      suffix, `state`, layer, layer_id, is_deleted, updater, creator, update_time, create_time
+      suffix, `state`, layer, layer_id, enterprise_id, is_deleted, updater, creator, update_time, create_time
       )
     values
     (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
       #{downloadUrl,jdbcType=VARCHAR}, #{previewUrl,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT},
       #{md5,jdbcType=VARCHAR}, #{property,jdbcType=TINYINT}, #{contentType,jdbcType=VARCHAR},
       #{suffix,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{layer,jdbcType=INTEGER},
-      #{layerId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT},
+      #{layerId,jdbcType=BIGINT}, #{enterpriseId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}, #{updater,jdbcType=BIGINT},
       #{creator,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}
       )
     on duplicate key update
@@ -297,6 +310,7 @@
     `state` = #{state,jdbcType=INTEGER},
     layer = #{layer,jdbcType=INTEGER},
     layer_id = #{layerId,jdbcType=BIGINT},
+    enterprise_id = #{enterpriseId,jdbcType=BIGINT},
     is_deleted = #{isDeleted,jdbcType=TINYINT},
     updater = #{updater,jdbcType=BIGINT},
     creator = #{creator,jdbcType=BIGINT},
@@ -345,6 +359,9 @@
       </if>
       <if test="layerId != null">
         layer_id,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
       </if>
       <if test="isDeleted != null">
         is_deleted,
@@ -403,6 +420,9 @@
       <if test="layerId != null">
         #{layerId,jdbcType=BIGINT},
       </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
       <if test="isDeleted != null">
         #{isDeleted,jdbcType=TINYINT},
       </if>
@@ -459,6 +479,9 @@
       </if>
       <if test="layerId != null">
         layer_id = #{layerId,jdbcType=BIGINT},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
       </if>
       <if test="isDeleted != null">
         is_deleted = #{isDeleted,jdbcType=TINYINT},

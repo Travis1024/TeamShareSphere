@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.travis.api.client.file.FileClient;
 import org.travis.api.dto.file.FileInfoSlimDTO;
 import org.travis.api.dto.file.MediaSuccessInfoDTO;
+import org.travis.common.exceptions.BadRequestException;
 import org.travis.common.exceptions.MinioOperationException;
 import org.travis.media.constants.MediaConstant;
 import org.travis.media.service.MediaService;
@@ -23,6 +24,7 @@ import ws.schild.jave.process.ffmpeg.DefaultFFMPEGLocator;
 import javax.annotation.Resource;
 import java.io.*;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @ClassName MediaServiceImpl
@@ -48,7 +50,11 @@ public class MediaServiceImpl implements MediaService {
     public void handlerMedia(Long fileId) {
         try {
             // 1、查询视频文件基础信息
-            FileInfoSlimDTO fileInfoSlimDTO = fileClient.querySlimInfoById(fileId);
+            Optional<FileInfoSlimDTO> fileInfoSlimOptional = Optional.ofNullable(fileClient.querySlimInfoById(fileId));
+            if (fileInfoSlimOptional.isEmpty()) {
+                throw new BadRequestException("未查询到相关文件!");
+            }
+            FileInfoSlimDTO fileInfoSlimDTO = fileInfoSlimOptional.get();
 
             // 2、初始化视频文件存放地址
             String tempFileFolder = File.pathSeparator + "tmp" + File.pathSeparator + "tss" + File.pathSeparator + fileId + File.pathSeparator;
@@ -80,7 +86,7 @@ public class MediaServiceImpl implements MediaService {
 
             // 5、发送视频处理成功回调
             log.error("[视频处理成功: {}] -> {}", fileId, "Success!");
-            fileClient.setSuccessInfo(fileId, mediaSuccessInfoDTO);
+            fileClient.setSuccessInfo(mediaSuccessInfoDTO);
         } catch (Exception e) {
             log.error("[视频处理失败: {}] -> {}", fileId, e.getMessage());
             fileClient.setErrorInfo(fileId, e.getMessage());

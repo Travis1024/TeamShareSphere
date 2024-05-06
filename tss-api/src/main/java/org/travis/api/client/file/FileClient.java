@@ -29,9 +29,8 @@ public interface FileClient {
 
     /**
      * 成功消息回调
-     * @param fileId    文件ID
      * @param mediaSuccessInfoDTO mediaSuccessInfoDTO
      */
-    void setSuccessInfo(Long fileId, MediaSuccessInfoDTO mediaSuccessInfoDTO);
+    void setSuccessInfo(MediaSuccessInfoDTO mediaSuccessInfoDTO);
 
 }

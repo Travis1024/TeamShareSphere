@@ -102,7 +102,7 @@ public class FileInfo extends com.baomidou.mybatisplus.extension.activerecord.Mo
      * 文件状态（0-文件异常、1-上传中、2-预览文件生成中、3-预览就绪）
      */
     @TableField(value = "`state`")
-    @Schema(description="文件状态（0-文件异常、1-上传中、2-预览文件生成中、3-预览就绪）")
+    @Schema(description="文件状态（0-文件异常、1-预览文件异常、2-上传中、3-预览文件生成中、4-预览就绪）")
     private Integer state;
 
     /**

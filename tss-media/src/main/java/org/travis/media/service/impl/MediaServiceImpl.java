@@ -25,6 +25,7 @@ import javax.annotation.Resource;
 import java.io.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @ClassName MediaServiceImpl
@@ -47,16 +48,10 @@ public class MediaServiceImpl implements MediaService {
     private MediaService mediaService;
 
     @Override
-    public void handlerMedia(Long fileId) {
+    public void handlerMedia(FileInfoSlimDTO fileInfoSlimDTO) {
+        Long fileId = fileInfoSlimDTO.getId();
         try {
-            // 1、查询视频文件基础信息
-            Optional<FileInfoSlimDTO> fileInfoSlimOptional = Optional.ofNullable(fileClient.querySlimInfoById(fileId));
-            if (fileInfoSlimOptional.isEmpty()) {
-                throw new BadRequestException("未查询到相关文件!");
-            }
-            FileInfoSlimDTO fileInfoSlimDTO = fileInfoSlimOptional.get();
-
-            // 2、初始化视频文件存放地址
+            // 1、初始化视频文件存放地址
             String tempFileFolder = File.pathSeparator + "tmp" + File.pathSeparator + "tss" + File.pathSeparator + fileId + File.pathSeparator;
             String tempFilePath = tempFileFolder + MediaConstant.MEDIA_FILE_MIDDLE_NAME + "." + fileInfoSlimDTO.getSuffix();
 
@@ -65,7 +60,7 @@ public class MediaServiceImpl implements MediaService {
             }
             File file = FileUtil.touch(tempFilePath);
 
-            // 3、从 minio 下载视频文件
+            // 2、从 minio 下载视频文件
             try {
                 FileUtil.writeFromStream(
                         minioClient.getObject(
@@ -81,10 +76,10 @@ public class MediaServiceImpl implements MediaService {
                 throw new MinioOperationException("视频下载失败: " + fileId);
             }
 
-            // 4、创建加密秘钥，上传秘钥到 Minio，存储相关字段，生成 keyinfo，视频切片及加密，删除本地缓存
+            // 3、创建加密秘钥，上传秘钥到 Minio，存储相关字段，生成 keyinfo，视频切片及加密，删除本地缓存
             MediaSuccessInfoDTO mediaSuccessInfoDTO = mediaService.handlerKms(fileInfoSlimDTO, tempFileFolder);
 
-            // 5、发送视频处理成功回调
+            // 4、发送视频处理成功回调
             log.error("[视频处理成功: {}] -> {}", fileId, "Success!");
             fileClient.setSuccessInfo(mediaSuccessInfoDTO);
         } catch (Exception e) {
@@ -139,8 +134,8 @@ public class MediaServiceImpl implements MediaService {
         List<File> loopFiles = FileUtil.loopFiles(tempFileFolder, pathname -> pathname.isFile() && (pathname.getName().endsWith(".ts") || pathname.getName().endsWith(".m3u8")));
         minioService.batchUploadFiles(fileInfoSlimDTO.getEnterpriseId().toString(), fileInfoSlimDTO.getId().toString(), loopFiles, 20);
 
-        // 8.删除本地缓存文件夹（TODO 可以考虑异步）
-        FileUtil.del(tempFileFolder);
+        // 8.异步删除本地缓存文件夹
+        CompletableFuture.runAsync(() -> FileUtil.del(tempFileFolder));
 
         // 9.返回回调结果
         MediaSuccessInfoDTO mediaSuccessInfoDTO = new MediaSuccessInfoDTO();

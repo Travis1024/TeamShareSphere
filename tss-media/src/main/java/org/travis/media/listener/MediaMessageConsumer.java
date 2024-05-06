@@ -9,6 +9,7 @@ import org.redisson.api.RBucket;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Component;
+import org.travis.api.dto.file.FileInfoSlimDTO;
 import org.travis.common.constants.RocketMqConstant;
 import org.travis.media.service.MediaService;
 
@@ -26,22 +27,22 @@ import java.time.temporal.ChronoUnit;
 @Slf4j
 @Component
 @RocketMQMessageListener(topic = RocketMqConstant.TOPIC_MEDIA_NAME, consumerGroup = RocketMqConstant.CONSUMER_GROUP_MEDIA_NAME)
-public class MediaMessageConsumer implements RocketMQListener<Long>, RocketMQPushConsumerLifecycleListener {
-
+public class MediaMessageConsumer implements RocketMQListener<FileInfoSlimDTO>, RocketMQPushConsumerLifecycleListener {
     @Resource
     private MediaService mediaService;
     @Resource
     private RedissonClient redissonClient;
 
     @Override
-    public void onMessage(Long fileId) {
+    public void onMessage(FileInfoSlimDTO fileInfoSlimDTO) {
+        Long fileId = fileInfoSlimDTO.getId();
         log.info("视频文件ID：{}", fileId);
 
         // 业务处理之前 redisson 加锁，防止重复消费 - (60分钟)
         RBucket<Object> bucket = redissonClient.getBucket("media:" + fileId);
         if (bucket.setIfAbsent(true, Duration.of(60, ChronoUnit.MINUTES))) {
             log.info("[{}] 视频文件开始处理!", fileId);
-            mediaService.handlerMedia(fileId);
+            mediaService.handlerMedia(fileInfoSlimDTO);
         } else {
             log.warn("[{}] 60 分钟内出现重复消费!", fileId);
         }

@@ -46,9 +46,13 @@ public class FileClientImpl implements FileClient {
 
     @Override
     public void setErrorInfo(Long fileId, String errorMessage) {
-        // TODO 数据表添加 message 字段
         log.error("[Media Handler Result: {}], Error: {}", fileId, errorMessage);
-        fileInfoMapper.update(Wrappers.<FileInfo>lambdaUpdate().set(FileInfo::getState, 1).eq(FileInfo::getId, fileId));
+        fileInfoMapper.update(
+                Wrappers.<FileInfo>lambdaUpdate()
+                        .set(FileInfo::getState, 1)
+                        .set(FileInfo::getStateMessage, errorMessage)
+                        .eq(FileInfo::getId, fileId)
+        );
     }
 
     @Override

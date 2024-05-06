@@ -106,6 +106,13 @@ public class FileInfo extends com.baomidou.mybatisplus.extension.activerecord.Mo
     private Integer state;
 
     /**
+     * 文件状态相关消息
+     */
+    @TableField(value = "state_message")
+    @Schema(description="文件状态相关消息")
+    private String stateMessage;
+
+    /**
      * 文件所属层级（0-企业、1-部门、2-团队、3-个人）
      */
     @TableField(value = "layer")
@@ -185,6 +192,8 @@ public class FileInfo extends com.baomidou.mybatisplus.extension.activerecord.Mo
     public static final String COL_SUFFIX = "suffix";
 
     public static final String COL_STATE = "state";
+
+    public static final String COL_STATE_MESSAGE = "state_message";
 
     public static final String COL_LAYER = "layer";
 

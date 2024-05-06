@@ -6,9 +6,12 @@ import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.multipart.MultipartFile;
 import org.travis.common.constants.RocketMqConstant;
 import org.travis.common.constants.SystemConstant;
 import org.travis.common.utils.UserThreadLocalUtil;
+import org.travis.file.pojo.dto.SingleFileUploadDTO;
 import org.travis.file.service.FileInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -45,6 +48,12 @@ public class FileInfoController {
                 log.info("MQ 消息发送失败：{}, 原因：{}", fileId, throwable.getMessage());
             }
         });
+    }
+
+    @Operation(summary = "上传单个文件到-Minio")
+    @PostMapping("/singleUpload")
+    private void uploadSingleFile(@RequestPart("file") MultipartFile multipartFile, @Validated @RequestBody SingleFileUploadDTO singleFileUploadDTO) {
+        fileInfoService.uploadSingleFile(multipartFile, singleFileUploadDTO);
     }
 
 }

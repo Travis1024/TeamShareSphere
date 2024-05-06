@@ -15,4 +15,5 @@ public interface MinioService {
 
     InputStream minioDownload(String bucketName, String objectName);
 
+    void uploadSingleFile(InputStream inputStream, String bucketName, String objectName, String contentType);
 }

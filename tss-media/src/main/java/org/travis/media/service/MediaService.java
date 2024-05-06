@@ -16,6 +16,6 @@ import java.security.NoSuchAlgorithmException;
  * @Data 2024/5/4
  */
 public interface MediaService {
-    void handlerMedia(Long fileId);
+    void handlerMedia(FileInfoSlimDTO fileInfoSlimDTO);
     MediaSuccessInfoDTO handlerKms(FileInfoSlimDTO fileInfoSlimDTO, String tempFileFolder) throws IOException, ServerException, InsufficientDataException, ErrorResponseException, NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
 }

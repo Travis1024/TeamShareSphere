@@ -3,6 +3,7 @@ package org.travis.file.service.impl;
 import io.minio.GetObjectArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
+import io.minio.PutObjectArgs;
 import org.springframework.stereotype.Service;
 import org.travis.common.exceptions.MinioOperationException;
 import org.travis.file.service.MinioService;
@@ -43,6 +44,22 @@ public class MinioServiceImpl implements MinioService {
                       .bucket(bucketName)
                       .object(objectName)
                       .build()
+            );
+        } catch (Exception e) {
+            throw new MinioOperationException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void uploadSingleFile(InputStream inputStream, String bucketName, String objectName, String contentType) {
+        try {
+            minioClient.putObject(
+                    PutObjectArgs.builder()
+                            .bucket(bucketName)
+                            .object(objectName)
+                            .stream(inputStream, inputStream.available(), -1)
+                            .contentType(contentType)
+                            .build()
             );
         } catch (Exception e) {
             throw new MinioOperationException(e.getMessage());

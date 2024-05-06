@@ -2,7 +2,7 @@ package org.travis.api.client.file;
 
 /**
  * @ClassName FileMinioClient
- * @Description TODO
+ * @Description FileMinioClient
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/5/4

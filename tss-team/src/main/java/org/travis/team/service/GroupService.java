@@ -5,7 +5,7 @@ import org.travis.team.entity.Group;
 import com.baomidou.mybatisplus.extension.service.IService;
     /**
  * @ClassName GroupService
- * @Description TODO
+ * @Description GroupService
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/30

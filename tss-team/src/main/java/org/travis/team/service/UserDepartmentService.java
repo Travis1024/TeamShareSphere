@@ -5,7 +5,7 @@ import org.travis.team.entity.UserDepartment;
 import com.baomidou.mybatisplus.extension.service.IService;
     /**
  * @ClassName UserDepartmentService
- * @Description TODO
+ * @Description UserDepartmentService
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/30

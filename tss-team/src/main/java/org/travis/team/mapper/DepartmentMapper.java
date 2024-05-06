@@ -8,7 +8,7 @@ import org.travis.team.entity.Department;
 
 /**
  * @ClassName DepartmentMapper
- * @Description TODO
+ * @Description DepartmentMapper
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/30

@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @ClassName FileMediaInfo
- * @Description TODO
+ * @Description FileMediaInfo
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/5/5

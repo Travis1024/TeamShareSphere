@@ -9,7 +9,7 @@ import org.travis.team.entity.Department;
 import org.travis.team.service.DepartmentService;
 /**
  * @ClassName DepartmentServiceImpl
- * @Description TODO
+ * @Description DepartmentServiceImpl
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/30

@@ -8,7 +8,7 @@ import org.travis.team.entity.UserEnterprise;
 
 /**
  * @ClassName UserEnterpriseMapper
- * @Description TODO
+ * @Description UserEnterpriseMapper
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/30

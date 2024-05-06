@@ -9,7 +9,7 @@ import org.travis.team.entity.UserDepartment;
 import org.travis.team.service.UserDepartmentService;
 /**
  * @ClassName UserDepartmentServiceImpl
- * @Description TODO
+ * @Description UserDepartmentServiceImpl
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/4/30

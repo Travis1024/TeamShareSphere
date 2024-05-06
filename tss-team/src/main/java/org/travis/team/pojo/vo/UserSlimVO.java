@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * @ClassName UserSlimVO
- * @Description TODO
+ * @Description UserSlimVO
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/5/3

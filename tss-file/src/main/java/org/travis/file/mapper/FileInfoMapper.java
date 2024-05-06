@@ -8,7 +8,7 @@ import org.travis.file.entity.FileInfo;
 
 /**
  * @ClassName FileInfoMapper
- * @Description TODO
+ * @Description FileInfoMapper
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/5/4

@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 
 /**
  * @ClassName FileInfo
- * @Description TODO
+ * @Description FileInfo
  * @Author travis-wei
  * @Version v1.0
  * @Data 2024/5/4

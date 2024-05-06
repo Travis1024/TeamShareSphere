@@ -31,4 +31,6 @@ public class MinioOperationController {
         minioService.makeBucket(bucketName);
     }
 
+    // public void
+
 }

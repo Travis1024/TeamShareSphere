@@ -35,7 +35,7 @@ public class MediaConstant {
     /**
      * key 秘钥获取链接
      */
-    public static final String KEY_FILE_GET_URL = "http://#{gatewayAddr}/file/info/getKeyFile?fileId=#{fileId}&token=#{token}";
+    public static final String KEY_FILE_GET_URL = "http://#{gatewayAddr}/file/mediaInfo/getKeyFile?fileId=#{fileId}&token=#{token}";
 
     /**
      * m3u8 文件中 ts 文件前缀

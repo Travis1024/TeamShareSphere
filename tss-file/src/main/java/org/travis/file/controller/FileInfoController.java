@@ -1,5 +1,6 @@
 package org.travis.file.controller;
 
+import com.alibaba.nacos.api.naming.pojo.healthcheck.impl.Http;
 import io.swagger.v3.oas.annotations.Operation;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
@@ -13,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 /**
 * (file_file_info)表控制层

@@ -1,5 +1,7 @@
 package org.travis.file.service;
 
+import java.io.InputStream;
+
 /**
  * @ClassName MinioService
  * @Description MinioService
@@ -10,4 +12,7 @@ package org.travis.file.service;
 public interface MinioService {
 
     void makeBucket(String bucketName);
+
+    InputStream minioDownload(String bucketName, String objectName);
+
 }
